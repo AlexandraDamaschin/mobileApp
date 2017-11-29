@@ -1,3 +1,4 @@
+import { AuthProvider } from '../providers/auth/auth';
 import { LoadingData } from '../models/common';
 import { EventType, LoadingAction } from '../models/Enum';
 import { FirebaseImagesProvider } from '../providers/firebase-images/firebase-images';
@@ -11,12 +12,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: string = 'LoginPage';
+  rootPage: string = 'TabsPage';
   private _loading: Loading;
 
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-    private _loadingCtrl: LoadingController, private _events: Events, private _alertCtrl: AlertController
+    private _loadingCtrl: LoadingController, private _events: Events, private _alertCtrl: AlertController,
+    private _auth: AuthProvider
 
   ) {
     platform.ready().then(() => {
