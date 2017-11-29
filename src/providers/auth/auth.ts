@@ -21,16 +21,17 @@ export class AuthProvider {
 
       this._firebaseAuth.authState.subscribe((user: firebase.User) => {
         if (user) {
+          this._events.publish(EventType.loading, new LoadingData(LoadingAction.hide));
+          this._events.publish(EventType.navigate, { page: 'TabsPage' });
           console.log(user);
-          this._events.publish(EventType.loading, new LoadingData(LoadingAction.hide))
-          this._events.publish(EventType.navigate, { page: 'TabsPage' })
-
-          // this._dataService.getUserDetails(user.uid).subscribe((res) => {
-          //   this._userDetails = <User>res;
-          //   this._router.navigate(['dashboard'])  
-          // });
         }
-      })
+        else {
+          this._events.publish(EventType.loading, new LoadingData(LoadingAction.hideAll));
+          this._events.publish(EventType.error, { message: 'Login Session has expired, please login again' });
+
+          this._events.publish(EventType.navigate, { page: 'LoginPage' });
+        }
+      });
 
     }).catch(err => {
       this._events.publish(EventType.error, err);
