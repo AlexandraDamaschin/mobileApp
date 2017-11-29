@@ -20,7 +20,7 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  login(){
+  login(){    
     this._auth.login(this.user);
   }
 
