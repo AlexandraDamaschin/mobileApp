@@ -1,3 +1,4 @@
+import { FirebaseImagesProvider } from '../providers/firebase-images/firebase-images';
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
