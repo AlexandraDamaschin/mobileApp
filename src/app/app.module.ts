@@ -9,6 +9,12 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
 
+import { AngularFireModule } from 'angularfire2'
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { environment } from '../environments/environment';
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -17,7 +23,7 @@ import { AuthProvider } from '../providers/auth/auth';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    AngularFireModule.initializeApp(firebaseConfig, 'angular-auth-firebase'),
+    AngularFireModule.initializeApp(environment.firebase, 'angular-auth-firebase'),
     AngularFireDatabaseModule,
     AngularFireAuthModule
   ],
