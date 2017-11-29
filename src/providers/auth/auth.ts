@@ -1,3 +1,4 @@
+import { User } from '../../models/User';
 import {NavController} from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -9,16 +10,17 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class AuthProvider {
 
-  constructor(private _firebaseAuth: AngularFireAuth, public navCtrl: NavController,) {
+  constructor(private _firebaseAuth: AngularFireAuth) {
   }
 
-  login(email: string, password: string) {
+  login(user: User) {
     // this._notifier.display(false, '');
-    this._firebaseAuth.auth.signInWithEmailAndPassword(email, password).then((user: firebase.User) => {
+    this._firebaseAuth.auth.signInWithEmailAndPassword(user.email, user.password).then((user: firebase.User) => {
 
       this._firebaseAuth.authState.subscribe((user: firebase.User) => {
         if (user) {
-          this.navCtrl.setRoot('TabsPage');
+          console.log(user);
+          // this.navCtrl.setRoot('TabsPage');
           // this._dataService.getUserDetails(user.uid).subscribe((res) => {
           //   this._userDetails = <User>res;
           //   this._router.navigate(['dashboard'])  
