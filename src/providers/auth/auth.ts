@@ -45,8 +45,16 @@ export class AuthProvider {
       .then((res) => {
         this._events.publish(EventType.navigate, { page: 'LoginPage' })
         // this._userDetails = null;
-        // this._router.navigate(['/login'])
       });
   }
 
+  sendPasswordReset(email: string) {
+    this._firebaseAuth.auth.sendPasswordResetEmail(email).then((res) => {
+      this._events.publish(EventType.error, { message: `An email has been sent to ${email}. Please follow the instructions contained in this email to reset your password` });
+    }
+    ).catch((err) => {
+      this._events.publish(EventType.error, err);
+
+    });
+  }
 }

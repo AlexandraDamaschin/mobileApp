@@ -3,7 +3,7 @@ import { LoadingData } from '../models/common';
 import { EventType, LoadingAction } from '../models/Enum';
 import { FirebaseImagesProvider } from '../providers/firebase-images/firebase-images';
 import { Component } from '@angular/core';
-import { AlertController, Events, Loading, LoadingController, NavController, Platform } from 'ionic-angular';
+import { AlertController, Events, Loading, LoadingController, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -18,7 +18,7 @@ export class MyApp {
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
     private _loadingCtrl: LoadingController, private _events: Events, private _alertCtrl: AlertController,
-    private _auth: AuthProvider
+    private _auth: AuthProvider //Need to inject this so its instantiated before the app loads
 
   ) {
     platform.ready().then(() => {
@@ -83,10 +83,8 @@ export class MyApp {
 
   showError(error) {
     this.hideAllLoading();
-    // setTimeout(() => {
-    // });
     let alert = this._alertCtrl.create({
-      title: "Error",
+      title: error.title,
       subTitle: error.message,
       buttons: ['OK']
     });
