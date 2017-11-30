@@ -14,18 +14,22 @@ export class AuthProvider {
   private _user: firebase.User;
 
   constructor(private _firebaseAuth: AngularFireAuth, private _events: Events) {
+    this._events.publish(EventType.loading, new LoadingData(LoadingAction.show));    
     this.subscribeToUser();
   }
 
   subscribeToUser() {
     this._firebaseAuth.authState.subscribe((user: firebase.User) => {
+      this._events.publish(EventType.loading, new LoadingData(LoadingAction.hideAll));
+      //authenticated
       if (user) {
         this._events.publish(EventType.navigate, { page: 'TabsPage' });
         this._user = user;
       }
       else {
-        this._events.publish(EventType.loading, new LoadingData(LoadingAction.hideAll));
+        //unauthenticated
         if(this._user){
+          //there was a user authenticated but it has expired, so alert the user that it's happened
           this._events.publish(EventType.error, { message: 'Login Session has expired, please login again' });
         }
         this._events.publish(EventType.navigate, { page: 'LoginPage' });
