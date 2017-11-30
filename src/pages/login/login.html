@@ -23,7 +23,6 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
         <button ion-button full color="default" type="submit" [disabled]="!loginForm.form.valid">Login
         </button>
       </ion-col>
@@ -32,7 +31,7 @@
   <ion-row>
     <ion-col>
       <p><a (click)="forgotPassword()"> Forgot Password </a></p>
-      <p><a (click)="forgotPassword()"> Register </a></p>
+      <p><a (click)="register()"> Register </a></p>
     </ion-col>
   </ion-row>
 </ion-content>

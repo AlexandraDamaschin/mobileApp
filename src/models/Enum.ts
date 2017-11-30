@@ -1,7 +1,8 @@
 export enum EventType{
     loading = 'loading',
     error = 'error',
-    navigate = 'nav'
+    navigate = 'nav',
+    toast = 'toast'
 }
 
 export enum LoadingAction{

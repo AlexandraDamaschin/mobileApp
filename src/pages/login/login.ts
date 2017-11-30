@@ -13,7 +13,7 @@ export class LoginPage {
 
   public user: User;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private _auth: AuthProvider,
+  constructor(private _navCtrl: NavController, private _auth: AuthProvider,
     private _alertCtrl: AlertController) {
     this.user = new User();
   }
@@ -24,6 +24,10 @@ export class LoginPage {
 
   login() {
     this._auth.login(this.user);
+  }
+
+  register(){
+    this._navCtrl.push('RegisterPage');
   }
 
   forgotPassword() {

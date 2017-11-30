@@ -1,0 +1,51 @@
+<!--
+  Generated template for the RegisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Register</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="ngForm" (ngSubmit)="register()" autocomplete="off">
+    <ion-row>
+      <ion-col>
+        <ion-list inset>
+          <ion-item>
+            <ion-label floating>First Name</ion-label>
+            <ion-input name="username" type="text" required [(ngModel)]="user.firstName" formControlName="firstName"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Last Name</ion-label>
+            <ion-input name="username" type="text" required [(ngModel)]="user.lastName" formControlName="lastName"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input name="username" type="text" required [(ngModel)]="user.email" formControlName="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Password</ion-label>
+            <ion-input name="password" type="password" required [(ngModel)]="user.password" formControlName="password"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Confirm Password</ion-label>
+            <ion-input name="password" type="password" required [(ngModel)]="confirmPassword" formControlName="confirmPassword"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button full color="default" type="submit" [disabled]="!ngForm.valid">Register
+        </button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

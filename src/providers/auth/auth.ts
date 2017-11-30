@@ -14,7 +14,7 @@ export class AuthProvider {
   private _user: firebase.User;
 
   constructor(private _firebaseAuth: AngularFireAuth, private _events: Events) {
-    this._events.publish(EventType.loading, new LoadingData(LoadingAction.show));    
+    this._events.publish(EventType.loading, new LoadingData(LoadingAction.show));
     this.subscribeToUser();
   }
 
@@ -28,7 +28,7 @@ export class AuthProvider {
       }
       else {
         //unauthenticated
-        if(this._user){
+        if (this._user) {
           //there was a user authenticated but it has expired, so alert the user that it's happened
           this._events.publish(EventType.error, { message: 'Login Session has expired, please login again' });
         }
@@ -66,6 +66,26 @@ export class AuthProvider {
     ).catch((err) => {
       this._events.publish(EventType.error, err);
 
+    });
+  }
+
+  register(user: User) {
+    this._events.publish(EventType.loading, new LoadingData(LoadingAction.show, "Please wait"));
+
+    this._firebaseAuth.auth.createUserWithEmailAndPassword(user.email, user.password).then((res: firebase.User) => {
+
+      user.registrationDate = new Date().toString();
+      user.uid = res.uid;
+      delete user.password; // we don't want to store users passwords in the db
+
+      this._firebaseAuth.app.database().ref('users/' + res.uid).set(user).then(() => {
+        this._events.publish(EventType.toast, { msg: 'Registration Successful' });
+      }).catch(err => {
+        this._events.publish(EventType.error, err);
+      });
+
+    }).catch(err => {
+      this._events.publish(EventType.error, err);
     });
   }
 }
