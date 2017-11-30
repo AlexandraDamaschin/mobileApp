@@ -11,6 +11,7 @@ import { LoadingData } from '../../models/common';
 
 @Injectable()
 export class AuthProvider {
+  private _user: firebase.User;
 
   constructor(private _firebaseAuth: AngularFireAuth, private _events: Events) {
     this.subscribeToUser();
@@ -20,19 +21,23 @@ export class AuthProvider {
     this._firebaseAuth.authState.subscribe((user: firebase.User) => {
       if (user) {
         this._events.publish(EventType.navigate, { page: 'TabsPage' });
-        console.log(user);
+        this._user = user;
       }
       else {
         this._events.publish(EventType.loading, new LoadingData(LoadingAction.hideAll));
-        this._events.publish(EventType.error, { message: 'Login Session has expired, please login again' });
+        if(this._user){
+          this._events.publish(EventType.error, { message: 'Login Session has expired, please login again' });
+        }
         this._events.publish(EventType.navigate, { page: 'LoginPage' });
+        this._user = null;
       }
     });
   }
 
   login(user: User) {
     this._events.publish(EventType.loading, new LoadingData(LoadingAction.show, "Logging in, please wait"));
-    this._firebaseAuth.auth.signInWithEmailAndPassword(user.email, user.password).then((user: firebase.User) => {
+    this._firebaseAuth.auth.signInWithEmailAndPassword(user.email, user.password).then((usr: firebase.User) => {
+      this._user = usr;
       this._events.publish(EventType.loading, new LoadingData(LoadingAction.hide));
 
     }).catch(err => {
@@ -50,7 +55,9 @@ export class AuthProvider {
 
   sendPasswordReset(email: string) {
     this._firebaseAuth.auth.sendPasswordResetEmail(email).then((res) => {
-      this._events.publish(EventType.error, { message: `An email has been sent to ${email}. Please follow the instructions contained in this email to reset your password` });
+      this._events.publish(EventType.error, {
+        message: `An email has been sent to ${email}. Please follow the instructions contained in this email to reset your password`
+      });
     }
     ).catch((err) => {
       this._events.publish(EventType.error, err);
