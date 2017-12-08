@@ -13,6 +13,7 @@ import { AngularFireModule } from 'angularfire2'
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
+import { FireDbProvider } from '../providers/fire-db/fire-db';
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import { environment } from '../environments/environment';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebase, 'angular-auth-firebase'),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule
   ],
@@ -36,7 +37,8 @@ import { environment } from '../environments/environment';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseImagesProvider,
-    AuthProvider               
+    AuthProvider,
+    FireDbProvider
   ]
 })
 export class AppModule {}
