@@ -7,4 +7,7 @@ export interface Photo{
     imageFormat: string;
     base64: string;
     storageLocation: string;
+    downloadURL: string;
+    address: string;
+    placeID: string;
 }
