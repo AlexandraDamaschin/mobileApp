@@ -1,13 +1,26 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="list">
+        <ion-icon name="list"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="map">
+        <ion-icon name="map"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
-  <button ion-button full color="secondary" (click)="loadData()">Fetch</button>
-  <ion-list [virtualScroll]="items2">
+  <div [ngClass]="{'hidden': segment !== 'list' }">
+    List
+  </div>
+  <div [ngClass]="{'hidden': segment !== 'map' }">
+    Maps n stuff
+  </div>
+
+  <ion-list [virtualScroll]="dbData">
     <ion-card *virtualItem="let item">
       <ion-item>
         <ion-avatar item-start>

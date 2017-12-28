@@ -8,11 +8,10 @@ import { Photo } from '../../models/Photo';
 
 @IonicPage()
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-my-photos',
+  templateUrl: 'my-photos.html',
 })
-export class HomePage {
-
+export class MyPhotosPage {
   dbData: Photo[];
   photos: any;
   segment: string = "list";
@@ -36,5 +35,4 @@ export class HomePage {
 
 
   }
-
 }
