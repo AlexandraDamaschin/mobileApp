@@ -15,6 +15,11 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
 import { FireDbProvider } from '../providers/fire-db/fire-db';
 
+import { GoogleMaps } from '../providers/google-maps/google-maps';
+import { ConnectivityService } from '../providers/connectivity/connectivity';
+import { Network } from '@ionic-native/network';
+import { Geolocation } from '@ionic-native/geolocation';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +43,11 @@ import { FireDbProvider } from '../providers/fire-db/fire-db';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseImagesProvider,
     AuthProvider,
-    FireDbProvider
+    FireDbProvider,
+    GoogleMaps,
+    ConnectivityService,
+    Network,
+    Geolocation
   ]
 })
 export class AppModule {}
