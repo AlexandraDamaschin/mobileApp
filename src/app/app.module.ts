@@ -21,6 +21,7 @@ import { Network } from '@ionic-native/network';
 import { Geolocation } from '@ionic-native/geolocation';
 
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -48,6 +49,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     ConnectivityService,
     Network,
     Geolocation
+    
   ]
 })
 export class AppModule {}

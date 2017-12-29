@@ -2,13 +2,14 @@ import { ConnectivityService } from '../connectivity/connectivity';
 import { ElementRef, Injectable } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
+
 declare var google;
 
 @Injectable()
 export class GoogleMaps {
 
-  mapElement: ElementRef;
-  pleaseConnect: ElementRef;
+  mapElement: any;
+  pleaseConnect: any;
   map: any;
   mapInitialised: boolean = false;
   mapLoaded: any;
@@ -17,12 +18,13 @@ export class GoogleMaps {
   apiKey: string = "AIzaSyDL_h4Q3HL5CwDFJrGOzztLY5tBbcldPuk";
 
   constructor(public connectivityService: ConnectivityService, public geolocation: Geolocation) {
+
   }
 
   init(mapElement: ElementRef, pleaseConnect: ElementRef): Promise<any> {
     this.mapElement = mapElement;
     this.pleaseConnect = pleaseConnect;
-    
+
     return this.loadGoogleMaps();
   }
 
@@ -66,25 +68,36 @@ export class GoogleMaps {
   }
 
   initMap(): Promise<any> {
+
     this.mapInitialised = true;
     return new Promise((resolve) => {
+      console.log("=======================LOADING MAP=========================")
       this.geolocation.getCurrentPosition().then((position) => {
+      console.log("=======================LOADING MAP 2=========================")
+        
         let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          console.log("=======================GOT COORDS=========================")
+        
         let mapOptions = {
           center: latLng,
           zoom: 13,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          mapTypeControl: false,
+          fullscreenControl: false,
+          streetViewControl: false
         }
         this.map = new google.maps.Map(this.mapElement, mapOptions);
         var marker = new google.maps.Marker({
           position: latLng,
           map: this.map,
           animation: google.maps.Animation.DROP,
-          title: 'Hello World!',
           icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
         });
-
+        this.createCenterIcon();
         resolve(true);
+      }).catch((err) => {
+        console.log("=====================ERROR====================");
+        console.log("===== error code " + err.code);
       });
     });
   }
@@ -121,6 +134,33 @@ export class GoogleMaps {
       this.disableMap();
     });
 
+  }
+
+  createCenterIcon() {
+    // Create a div to hold the control.
+    var controlDiv = document.createElement('div');
+
+    // Set CSS for the control border
+    var controlUI = document.createElement('div');
+    controlUI.style.backgroundColor = '#fff';
+    controlUI.style.border = '2px solid #fff';
+    controlUI.style.cursor = 'pointer';
+    controlUI.style.marginBottom = '22px';
+    controlUI.style.textAlign = 'center';
+    controlUI.title = 'Click to recenter the map';
+    controlDiv.appendChild(controlUI);
+
+    // Set CSS for the control interior
+    var controlText = document.createElement('div');
+    controlText.style.color = 'rgb(25,25,25)';
+    controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+    controlText.style.fontSize = '16px';
+    controlText.style.lineHeight = '38px';
+    controlText.style.paddingLeft = '5px';
+    controlText.style.paddingRight = '5px';
+    controlText.innerHTML = 'Center Map';
+    controlUI.appendChild(controlText);
+    this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controlDiv);
   }
 
 }
