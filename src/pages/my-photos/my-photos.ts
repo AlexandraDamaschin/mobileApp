@@ -69,21 +69,10 @@ export class MyPhotosPage {
     for (var i = 0; i < data.length; i++) {
       this.addMarkerWithTimeout(data[i],  i * 350);
     }
-    
-    // https://www.google.com/maps/d/u/0/viewer?mid=1icXjgXJ5da1l2BQjMNgXAI4dlkw&hl=en_US&ll=-0.006750656112348882%2C0.004613761901850921&z=16
-    // _.forEach(data, (p: Photo) => {
-    //   // let latLng = new google.maps.LatLng(p.lat, p.lng);
-    //   var marker = new google.maps.Marker({
-    //     position: new google.maps.LatLng(p.lat, p.lng),
-    //     animation: google.maps.Animation.DROP,
-    //     map : this.maps.map,
-    //     icon: "http://maps.gstatic.com/mapfiles/ms2/micons/green.png"
-    //   });
-      // this.maps.addPinToMap(marker);
-    // });
   }
 
   addMarkerWithTimeout(p, timeout) {
+    // https://developers.google.com/maps/documentation/javascript/markers
     window.setTimeout(() => {
       this.markers.push(new google.maps.Marker({
         position: new google.maps.LatLng(p.lat, p.lng),
@@ -101,11 +90,4 @@ export class MyPhotosPage {
     this.markers = [];
   }
 
-  // drop() {
-  //   for (var i =0; i < markerArray.length; i++) {
-  //     setTimeout(function() {
-  //       addMarkerMethod();
-  //     }, i * 200);
-  //   }
-  
 }

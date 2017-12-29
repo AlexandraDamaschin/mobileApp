@@ -7,7 +7,7 @@ import { AngularFireAction, AngularFireDatabase, DatabaseSnapshot } from 'angula
 import { Observable } from 'rxjs/Observable';
 import { Photo } from '../../models/Photo';
 import { Geolocation } from '@ionic-native/geolocation';
-
+import * as _ from 'lodash';
 
 declare var google;
 
@@ -21,8 +21,10 @@ export class AllPhotosPage {
   dbData: Photo[];
   photos: any;
   segment: string = "map";
+  heatmap: any;
+  hmPoints: any[];
 
-  @ViewChild('map') mapElement: ElementRef;
+  @ViewChild('mapall') mapElement: ElementRef;
   @ViewChild('pleaseConnect') pleaseConnect: ElementRef;
 
   latitude: number;
@@ -43,9 +45,10 @@ export class AllPhotosPage {
     this.loadData();
 
     let mapLoaded = this.maps.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement).then(() => {
-    // this.autocompleteService = new google.maps.places.AutocompleteService();
-    // this.placesService = new google.maps.places.PlacesService(this.maps.map);
-    // this.searchDisabled = false;
+      // this.autocompleteService = new google.maps.places.AutocompleteService();
+      // this.placesService = new google.maps.places.PlacesService(this.maps.map);
+      // this.searchDisabled = false;
+    
     });
   }
 
@@ -54,9 +57,21 @@ export class AllPhotosPage {
     this.db.list<Photo>('capturedPhotos/').valueChanges().subscribe((res: Photo[]) => {
       console.log(res);
       this.dbData = res;
+      this.createHeatMapDataPoints(res);
     });
+  }
 
-
+  createHeatMapDataPoints(data: Photo[]){
+    this.hmPoints = [];
+    _.forEach(data, (p: Photo) => {
+      this.hmPoints.push(new google.maps.LatLng(p.lat, p.lng))
+    });
+    this.heatmap = new google.maps.visualization.HeatmapLayer({
+      data: this.hmPoints,
+      map: this.maps.map
+    });
+    this.heatmap.set('radius', this.heatmap.get('radius') ? null : 20);
+    // this.heatmap.setMap(this.heatmap.getMap() ? null : this.maps.map);
   }
 
 }
