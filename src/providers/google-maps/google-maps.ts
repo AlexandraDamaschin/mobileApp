@@ -71,37 +71,35 @@ export class GoogleMaps {
 
     this.mapInitialised = true;
     return new Promise((resolve) => {
-      console.log("=======================LOADING MAP=========================")
-      this.geolocation.getCurrentPosition().then((position) => {
-      console.log("=======================LOADING MAP 2=========================")
-        
-        let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-          console.log("=======================GOT COORDS=========================")
-        
-        let mapOptions = {
-          center: latLng,
-          zoom: 13,
-          mapTypeId: google.maps.MapTypeId.ROADMAP,
-          mapTypeControl: false,
-          fullscreenControl: false,
-          streetViewControl: false
-        }
-        this.map = new google.maps.Map(this.mapElement, mapOptions);
-        var marker = new google.maps.Marker({
-          position: latLng,
-          map: this.map,
-          animation: google.maps.Animation.DROP,
-          icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-        });
-        this.createCenterIcon();
-        resolve(true);
-      }).catch((err) => {
-        console.log("=====================ERROR====================");
-        console.log("===== error code " + err.code);
-      });
+      // this.geolocation.getCurrentPosition().then((position) => {
+      let lat = 53.4374523;
+      let lng = -8.0369021;
+      let latLng = new google.maps.LatLng(lat, lng);
+
+      let mapOptions = {
+        center: latLng,
+        zoom: 7,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: false,
+        fullscreenControl: false,
+        streetViewControl: false
+      }
+      this.map = new google.maps.Map(this.mapElement, mapOptions);
+      // this.addCenterPin(latLng);
+      // this.createCenterIcon();
+      resolve(true);
+      // });
     });
   }
 
+  addCenterPin(latLng) {
+    var marker = new google.maps.Marker({
+      position: latLng,
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+    });
+  }
   disableMap(): void {
     if (this.pleaseConnect) {
       this.pleaseConnect.style.display = "block";
