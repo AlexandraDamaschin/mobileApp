@@ -106,6 +106,15 @@ export class GoogleMaps {
     }
   }
 
+  addPinToMap(pos, animation, icon){
+    var marker = new google.maps.Marker({
+      position: pos,
+      map: this.map,
+      animation: animation,
+      icon: icon
+    });
+  }
+
   enableMap(): void {
     if (this.pleaseConnect) {
       this.pleaseConnect.style.display = "none";
