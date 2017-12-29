@@ -29,7 +29,7 @@ page-my-photos {
         align-items: center;
     }
     .hidden{
-        display: none;
+        display: none!important;
     }
     .map-wrapper{
         width: 100%;

@@ -48,21 +48,6 @@ export class MyPhotosPage {
     });
   }
 
-  segmentChanged($event) {
-    console.log(this.segment);
-    console.log(document.getElementById('map'));
-    console.log($event)
-    // if (!this.mapLoaded && this.segment == "map") {
-    //   console.log("loading shite");
-    //   this.mapLoaded = this.maps.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement).then(() => {
-    //     // this.autocompleteService = new google.maps.places.AutocompleteService();
-    //     // this.placesService = new google.maps.places.PlacesService(this.maps.map);
-    //     // this.searchDisabled = false;
-    //     console.log(document.getElementById('map'));
-
-    //   });
-    // }
-  }
 
   loadData() {
     this.db.list<Photo>('capturedPhotos/').valueChanges().subscribe((res: Photo[]) => {

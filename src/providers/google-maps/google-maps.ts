@@ -76,6 +76,14 @@ export class GoogleMaps {
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         this.map = new google.maps.Map(this.mapElement, mapOptions);
+        var marker = new google.maps.Marker({
+          position: latLng,
+          map: this.map,
+          animation: google.maps.Animation.DROP,
+          title: 'Hello World!',
+          icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+        });
+
         resolve(true);
       });
     });
