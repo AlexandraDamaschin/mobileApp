@@ -60,14 +60,14 @@ export class MyPhotosPage {
     this.db.list<Photo>('capturedPhotos/').valueChanges().subscribe((res: Photo[]) => {
       this.dbData = res;
       this.plotPins(res);
-    });
+    }, (error: Response) => { console.log("no auth") });
   }
 
   plotPins(data: Photo[]) {
 
     this.clearMarkers();
     for (var i = 0; i < data.length; i++) {
-      this.addMarkerWithTimeout(data[i],  i * 350);
+      this.addMarkerWithTimeout(data[i],  i * 200);
     }
   }
 

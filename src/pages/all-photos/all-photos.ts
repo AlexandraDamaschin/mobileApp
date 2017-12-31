@@ -58,7 +58,7 @@ export class AllPhotosPage {
       console.log(res);
       this.dbData = res;
       this.createHeatMapDataPoints(res);
-    });
+    }, (error: Response) => { console.log("no auth") });
   }
 
   createHeatMapDataPoints(data: Photo[]){

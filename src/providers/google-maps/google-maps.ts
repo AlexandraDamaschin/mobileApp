@@ -46,7 +46,7 @@ export class GoogleMaps {
           script.id = "googleMaps";
 
           if (this.apiKey) {
-            script.src = 'http://maps.google.com/maps/api/js?key=' + this.apiKey + '&callback=mapInit&libraries=places,visualization';
+            script.src = 'http://maps.google.com/maps/api/js?key=' + this.apiKey + '&callback=mapInit&libraries=visualization,places';
           } else {
             script.src = 'http://maps.google.com/maps/api/js?callback=mapInit';
           }
