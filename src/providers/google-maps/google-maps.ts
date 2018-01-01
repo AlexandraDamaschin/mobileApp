@@ -5,6 +5,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { MapEvent } from '../../models/common';
 import { Platform, Events } from 'ionic-angular';
 import { DEFAULT_INTERPOLATION_CONFIG } from '@angular/compiler/src/ml_parser/interpolation_config';
+import { NotificationProvider } from '../notification/notification';
 
 declare var google;
 const DEFAULT_ZOOM = 7;
@@ -22,7 +23,7 @@ export class GoogleMaps {
   apiKey: string = "AIzaSyDL_h4Q3HL5CwDFJrGOzztLY5tBbcldPuk";
   private _currentZoom: number;
 
-  constructor(public connectivityService: ConnectivityService, public geolocation: Geolocation) {
+  constructor(public connectivityService: ConnectivityService, public geolocation: Geolocation, private _notification: NotificationProvider) {
     this._currentZoom = DEFAULT_ZOOM;
   }
 
@@ -105,11 +106,11 @@ export class GoogleMaps {
 
   notifyZoomChanged() {
     let newZoomLevel = this.map.getZoom();
-    let notification = new MapEvent(MapAction.zoomChanged);
-    notification.newZoom = newZoomLevel;
-    notification.oldZoom = this._currentZoom;
-    console.log(notification);
+    let n = new MapEvent(MapAction.zoomChanged);
+    n.newZoom = newZoomLevel;
+    n.oldZoom = this._currentZoom;
     this._currentZoom = newZoomLevel;
+    this._notification.notify(EventType.map, n);
   }
 
   addCenterPin(latLng) {

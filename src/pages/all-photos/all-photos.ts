@@ -2,7 +2,7 @@ import { EventType, MapAction } from '../../models/Enum';
 import { GoogleMaps } from '../../providers/google-maps/google-maps';
 import { AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Component, ElementRef, NgZone, ViewChild } from '@angular/core';
-import { Events, Platform, ViewController, IonicPage, NavController } from 'ionic-angular';
+import { Events, IonicPage, NavController, Platform, Tab, ViewController } from 'ionic-angular';
 import { FireDbProvider } from '../../providers/fire-db/fire-db';
 import { AngularFireAction, AngularFireDatabase, DatabaseSnapshot } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
@@ -10,6 +10,7 @@ import { Photo } from '../../models/Photo';
 import { Geolocation } from '@ionic-native/geolocation';
 import * as _ from 'lodash';
 import { MapEvent } from '../../models/common';
+import { NotificationProvider } from '../../providers/notification/notification';
 
 declare var google;
 
@@ -40,13 +41,12 @@ export class AllPhotosPage {
   mapLoaded: any;
 
   constructor(public navCtrl: NavController, public zone: NgZone, public maps: GoogleMaps, public platform: Platform,
-    public geolocation: Geolocation, public viewCtrl: ViewController, public db: AngularFireDatabase, private _events: Events) {
+    public geolocation: Geolocation, public viewCtrl: ViewController, public db: AngularFireDatabase, private _notification: NotificationProvider) {
 
-      // this._events.subscribe(EventType.map, (data : MapEvent) => {
-      //   if(data.type === MapAction.zoomChanged){
-      //     this.mapZoomChanged(data);
-      //   }
-      // })
+      _notification.emitter.subscribe((data) => {
+        if(data.type === EventType.map)
+        this.mapZoomChanged(data.obj);
+      })
   }
   ionViewDidLoad(): void {
     this.loadData();
@@ -61,7 +61,6 @@ export class AllPhotosPage {
 
   loadData() {
     this.db.list<Photo>('capturedPhotos/').valueChanges().subscribe((res: Photo[]) => {
-      console.log(res);
       this.dbData = res;
       this.createHeatMapDataPoints(res);
     }, (error: Response) => { console.log("no auth") });

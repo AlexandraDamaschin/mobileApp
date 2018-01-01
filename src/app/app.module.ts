@@ -19,6 +19,7 @@ import { GoogleMaps } from '../providers/google-maps/google-maps';
 import { ConnectivityService } from '../providers/connectivity/connectivity';
 import { Network } from '@ionic-native/network';
 import { Geolocation } from '@ionic-native/geolocation';
+import { NotificationProvider } from '../providers/notification/notification';
 
 
 
@@ -49,6 +50,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     Network,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    NotificationProvider,
     
   ]
 })
