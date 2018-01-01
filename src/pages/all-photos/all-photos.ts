@@ -1,13 +1,15 @@
+import { EventType, MapAction } from '../../models/Enum';
 import { GoogleMaps } from '../../providers/google-maps/google-maps';
 import { AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Component, ElementRef, NgZone, ViewChild } from '@angular/core';
-import { Platform, ViewController, IonicPage, NavController } from 'ionic-angular';
+import { Events, Platform, ViewController, IonicPage, NavController } from 'ionic-angular';
 import { FireDbProvider } from '../../providers/fire-db/fire-db';
 import { AngularFireAction, AngularFireDatabase, DatabaseSnapshot } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { Photo } from '../../models/Photo';
 import { Geolocation } from '@ionic-native/geolocation';
 import * as _ from 'lodash';
+import { MapEvent } from '../../models/common';
 
 declare var google;
 
@@ -38,8 +40,13 @@ export class AllPhotosPage {
   mapLoaded: any;
 
   constructor(public navCtrl: NavController, public zone: NgZone, public maps: GoogleMaps, public platform: Platform,
-    public geolocation: Geolocation, public viewCtrl: ViewController, public db: AngularFireDatabase) {
+    public geolocation: Geolocation, public viewCtrl: ViewController, public db: AngularFireDatabase, private _events: Events) {
 
+      // this._events.subscribe(EventType.map, (data : MapEvent) => {
+      //   if(data.type === MapAction.zoomChanged){
+      //     this.mapZoomChanged(data);
+      //   }
+      // })
   }
   ionViewDidLoad(): void {
     this.loadData();
@@ -47,8 +54,7 @@ export class AllPhotosPage {
     let mapLoaded = this.maps.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement).then(() => {
       // this.autocompleteService = new google.maps.places.AutocompleteService();
       // this.placesService = new google.maps.places.PlacesService(this.maps.map);
-      // this.searchDisabled = false;
-    
+      // this.searchDisabled = false
     });
   }
 
@@ -61,7 +67,7 @@ export class AllPhotosPage {
     }, (error: Response) => { console.log("no auth") });
   }
 
-  createHeatMapDataPoints(data: Photo[]){
+  createHeatMapDataPoints(data: Photo[]) {
     this.hmPoints = [];
     _.forEach(data, (p: Photo) => {
       this.hmPoints.push(new google.maps.LatLng(p.lat, p.lng))
@@ -72,6 +78,10 @@ export class AllPhotosPage {
     });
     this.heatmap.set('radius', this.heatmap.get('radius') ? null : 20);
     // this.heatmap.setMap(this.heatmap.getMap() ? null : this.maps.map);
+  }
+
+  mapZoomChanged(data: MapEvent){
+    console.log(data);
   }
 
 }

@@ -41,14 +41,14 @@ import { Geolocation } from '@ionic-native/geolocation';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseImagesProvider,
     AuthProvider,
     FireDbProvider,
     GoogleMaps,
     ConnectivityService,
     Network,
-    Geolocation
+    Geolocation,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
     
   ]
 })

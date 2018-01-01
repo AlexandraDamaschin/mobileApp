@@ -1,9 +1,13 @@
+import { EventType, MapAction } from '../../models/Enum';
 import { ConnectivityService } from '../connectivity/connectivity';
 import { ElementRef, Injectable } from '@angular/core';
-import { Platform } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
+import { MapEvent } from '../../models/common';
+import { Platform, Events } from 'ionic-angular';
+import { DEFAULT_INTERPOLATION_CONFIG } from '@angular/compiler/src/ml_parser/interpolation_config';
 
 declare var google;
+const DEFAULT_ZOOM = 7;
 
 @Injectable()
 export class GoogleMaps {
@@ -16,9 +20,10 @@ export class GoogleMaps {
   mapLoadedObserver: any;
   currentMarker: any;
   apiKey: string = "AIzaSyDL_h4Q3HL5CwDFJrGOzztLY5tBbcldPuk";
+  private _currentZoom: number;
 
   constructor(public connectivityService: ConnectivityService, public geolocation: Geolocation) {
-
+    this._currentZoom = DEFAULT_ZOOM;
   }
 
   init(mapElement: ElementRef, pleaseConnect: ElementRef): Promise<any> {
@@ -75,21 +80,36 @@ export class GoogleMaps {
       let lat = 53.4374523;
       let lng = -8.0369021;
       let latLng = new google.maps.LatLng(lat, lng);
+      let cz = this._currentZoom;
 
       let mapOptions = {
         center: latLng,
-        zoom: 7,
+        zoom: DEFAULT_ZOOM,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,
         fullscreenControl: false,
-        streetViewControl: false
+        streetViewControl: false,
+        gestureHandling: 'greedy',
+        // zoomControl: false
       }
       this.map = new google.maps.Map(this.mapElement, mapOptions);
       // this.addCenterPin(latLng);
       // this.createCenterIcon();
+      this.map.addListener('zoom_changed', () => {
+        this.notifyZoomChanged();
+      });
       resolve(true);
       // });
     });
+  }
+
+  notifyZoomChanged() {
+    let newZoomLevel = this.map.getZoom();
+    let notification = new MapEvent(MapAction.zoomChanged);
+    notification.newZoom = newZoomLevel;
+    notification.oldZoom = this._currentZoom;
+    console.log(notification);
+    this._currentZoom = newZoomLevel;
   }
 
   addCenterPin(latLng) {
@@ -106,7 +126,7 @@ export class GoogleMaps {
     }
   }
 
-  addPinToMap(pos, animation, icon){
+  addPinToMap(pos, animation, icon) {
     var marker = new google.maps.Marker({
       position: pos,
       map: this.map,

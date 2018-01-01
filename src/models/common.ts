@@ -1,4 +1,4 @@
-import { LoadingAction } from "./Enum";
+import { LoadingAction, MapAction } from "./Enum";
 
 export class LoadingData {
     action: LoadingAction;
@@ -8,4 +8,15 @@ export class LoadingData {
         this.action = action;
         this.message = message
     }
+}
+
+export class MapEvent{
+    type: MapAction;
+    oldZoom: number;
+    newZoom: number;
+
+    constructor(t: MapAction){
+        this.type = t;
+    }
+
 }
