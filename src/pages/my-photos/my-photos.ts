@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { Photo } from '../../models/Photo';
 import { Geolocation } from '@ionic-native/geolocation';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 
 
 declare var google;
@@ -38,7 +39,7 @@ export class MyPhotosPage {
 
   constructor(public navCtrl: NavController, public zone: NgZone, public maps: GoogleMaps, public platform: Platform,
     public geolocation: Geolocation, public viewCtrl: ViewController, public db: AngularFireDatabase) {
-      this.markers = [];
+    this.markers = [];
 
   }
   ionViewDidLoad(): void {
@@ -67,20 +68,43 @@ export class MyPhotosPage {
 
     this.clearMarkers();
     for (var i = 0; i < data.length; i++) {
-      this.addMarkerWithTimeout(data[i],  i * 200);
+      this.addMarkerWithTimeout(data[i], i * 200);
     }
   }
 
-  addMarkerWithTimeout(p, timeout) {
+  addMarkerWithTimeout(p: Photo, timeout) {
+
     // https://developers.google.com/maps/documentation/javascript/markers
     window.setTimeout(() => {
-      this.markers.push(new google.maps.Marker({
+      let marker = new google.maps.Marker({
         position: new google.maps.LatLng(p.lat, p.lng),
-            animation: google.maps.Animation.DROP,
-            map : this.maps.map,
-            icon: "http://maps.gstatic.com/mapfiles/ms2/micons/green.png"
-      }));
+        animation: google.maps.Animation.DROP,
+        map: this.maps.map,
+        icon: "http://maps.gstatic.com/mapfiles/ms2/micons/green.png"
+      })
+      this.addInfoWindowToMarker(marker, p);
+      this.markers.push(marker);
     }, timeout);
+  }
+
+  addInfoWindowToMarker(marker: any, p: Photo) {
+    let date = moment(parseInt(p.date)).format('DD/MM/YYYY');
+    console.log(date);
+    let contentString = `
+    <div id="content"><h1>${date}</h1>
+      <div id="bodyContent">
+        <img src="${p.downloadURL}" width="250">
+        <p>${p.address}</p>
+      </div>
+    </div>`;
+  
+
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    marker.addListener('click', () => {
+      infowindow.open(this.maps.map, marker);
+    });
   }
 
   clearMarkers() {
