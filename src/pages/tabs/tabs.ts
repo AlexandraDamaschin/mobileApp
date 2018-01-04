@@ -9,7 +9,7 @@ export class TabsPage {
 
   tab1Root = 'MyPhotosPage';
   tab2Root = 'AllPhotosPage';
-  tab3Root = 'ContactPage';
+  tab3Root = 'AccountPage';
 
   constructor() {
 
