@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AuthProvider } from '../../providers/auth/auth';
+import { User } from '../../models/User';
 
 /**
  * Generated class for the AccountPage page.
@@ -15,11 +17,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AccountPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public user: User;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private _auth: AuthProvider) {
+    this.user = new User();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AccountPage');
+  }
+  logout() {
+    this._auth.logout();
   }
 
 }
