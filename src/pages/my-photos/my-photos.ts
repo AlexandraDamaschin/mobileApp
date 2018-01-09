@@ -114,4 +114,9 @@ export class MyPhotosPage {
     this.markers = [];
   }
 
+    //open edit details page
+    openEdit(){
+      this.navCtrl.push('EditPicturePage')
+    }
+
 }
