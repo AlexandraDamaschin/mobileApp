@@ -26,14 +26,9 @@ export class EditPicturePage {
   }
 
   ionViewDidLoad() {
-    this.loadData();
 
   }
-  loadData() {
-    this.db.list<Photo>('capturedPhotos/').valueChanges().subscribe((res: Photo[]) => {
-      this.dbData = res;
-    }, (error: Response) => { console.log("no auth") });
-  }
+  
 // go back to my photos page
   onBackButton(){
     this.navCtrl.push('MyPhotosPage')
