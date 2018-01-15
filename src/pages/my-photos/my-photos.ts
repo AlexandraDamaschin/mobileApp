@@ -37,8 +37,14 @@ export class MyPhotosPage {
   location: any;
   mapLoaded: any;
 
-  constructor(public navCtrl: NavController, public zone: NgZone, public maps: GoogleMaps, public platform: Platform,
-    public geolocation: Geolocation, public viewCtrl: ViewController, public db: AngularFireDatabase) {
+  constructor(
+    public navCtrl: NavController,
+    public zone: NgZone,
+    public maps: GoogleMaps,
+    public platform: Platform,
+    public geolocation: Geolocation,
+    public viewCtrl: ViewController,
+    public db: AngularFireDatabase) {
     this.markers = [];
 
   }
@@ -97,7 +103,7 @@ export class MyPhotosPage {
         <p>${p.address}</p>
       </div>
     </div>`;
-  
+
 
     var infowindow = new google.maps.InfoWindow({
       content: contentString
@@ -114,9 +120,9 @@ export class MyPhotosPage {
     this.markers = [];
   }
 
-    //open edit details page
-    openEdit(){
-      this.navCtrl.push('EditPicturePage')
-    }
+  //open edit details page
+  openEdit() {
+    this.navCtrl.push('EditPicturePage')
+  }
 
 }
