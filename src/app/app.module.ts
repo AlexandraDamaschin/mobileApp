@@ -20,7 +20,7 @@ import { ConnectivityService } from '../providers/connectivity/connectivity';
 import { Network } from '@ionic-native/network';
 import { Geolocation } from '@ionic-native/geolocation';
 import { NotificationProvider } from '../providers/notification/notification';
-
+import { Camera } from '@ionic-native/camera';
 
 
 @NgModule({
@@ -51,6 +51,7 @@ import { NotificationProvider } from '../providers/notification/notification';
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     NotificationProvider,
+    Camera,
     
   ]
 })

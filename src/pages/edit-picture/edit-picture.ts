@@ -1,5 +1,5 @@
-import { Component, ViewChild, ElementRef, NgZone  } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular'; 
+import { Component, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { IonicPage, NavController } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 import { Platform, ActionSheetController, LoadingController } from 'ionic-angular';
 
@@ -26,11 +26,11 @@ export class EditPicturePage {
 
   constructor(
     public navCtrl: NavController,
-    private camera: Camera,
+    public camera: Camera,
     public platform: Platform,
     public loadingCtrl: LoadingController,
     public actionsheetCtrl: ActionSheetController) {
-      this._zone = new NgZone({ enableLongStackTrace: false });
+    this._zone = new NgZone({ enableLongStackTrace: false });
   }
 
   ionViewDidLoad() {
@@ -40,8 +40,8 @@ export class EditPicturePage {
   /// Execute a menu 
   openMenu() {
     let actionSheet;
-      if (this.image) {
-        actionSheet = this.actionsheetCtrl.create({
+    if (this.image) {
+      actionSheet = this.actionsheetCtrl.create({
         title: 'Actions',
         cssClass: 'action-sheets-basic-page',
         buttons: [
@@ -75,16 +75,9 @@ export class EditPicturePage {
             }
           }
         ]
-       });
-      }
-      else {
-        actionSheet = this.actionsheetCtrl.create({
-          title: 'Actions',
-          cssClass: 'action-sheets-basic-page',
-          
-        });
-      }
-      actionSheet.present();
+      });
+    }
+    actionSheet.present();
   }
 
   restoreImage() {
@@ -103,7 +96,7 @@ export class EditPicturePage {
       alert(e);
       return;
     }
-  
+
     /// taken from glfx documentation
     var imageElem = this.imageResult.nativeElement; // another trick is acces to DOM element
     var texture = canvas.texture(imageElem);
@@ -128,13 +121,13 @@ export class EditPicturePage {
     // Take a picture saving in device, as jpg and allows edit
     this.camera.getPicture({
       quality: 100,
-      destinationType: this.camera.DestinationType.NATIVE_URI,
+      //destinationType: this.camera.DestinationType.NATIVE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       targetHeight: 1000,
       sourceType: 1,
       allowEdit: true,
-      saveToPhotoAlbum: true,
-      correctOrientation: true
+      //saveToPhotoAlbum: true,
+      //correctOrientation: true
     }).then((imageURI) => {
       loader.dismissAll();
 
@@ -145,9 +138,9 @@ export class EditPicturePage {
       console.log(`ERROR -> ${JSON.stringify(err)}`);
     });
   }
-  
-// go back to my photos page
-  onBackButton(){
+
+  // go back to my photos page
+  onBackButton() {
     this.navCtrl.push('MyPhotosPage')
   }
 }
