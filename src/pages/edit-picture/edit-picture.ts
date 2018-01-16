@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Photo } from '../../models/Photo';
-import { AngularFireDatabase } from 'angularfire2/database';
 
 /**
  * Generated class for the EditPicturePage page.
@@ -16,13 +14,9 @@ import { AngularFireDatabase } from 'angularfire2/database';
   templateUrl: 'edit-picture.html',
 })
 export class EditPicturePage {
-  dbData: Photo[];
-  photos: any;
 
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    public db: AngularFireDatabase) {
+    public navCtrl: NavController) {
   }
 
   ionViewDidLoad() {
