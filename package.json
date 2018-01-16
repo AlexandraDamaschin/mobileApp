@@ -33,6 +33,7 @@
         "angularfire2": "^5.0.0-rc.4",
         "cordova-android": "7.0.0",
         "cordova-plugin-android-permissions": "^1.0.0",
+        "cordova-plugin-canvas2image": "^0.7.0",
         "cordova-plugin-device": "^1.1.4",
         "cordova-plugin-facebook4": "^1.9.1",
         "cordova-plugin-geolocation": "~3.0.0",
@@ -68,7 +69,8 @@
             "cordova-plugin-facebook4": {
                 "APP_ID": "422969994789166",
                 "APP_NAME": "“ProjectAwesome\n\n\nionic cordova plugin add cordova-plugin-facebook4 --variable APP_ID=422969994789166 --variable APP_NAME=“ProjectAwesome"
-            }
+            },
+            "cordova-plugin-canvas2image": {}
         },
         "platforms": [
             "android"
