@@ -99,6 +99,7 @@ export class EditPicturePage {
 
     /// taken from glfx documentation
     var imageElem = this.imageResult.nativeElement; // another trick is acces to DOM element
+    //convert imageElem to a texture
     var texture = canvas.texture(imageElem);
 
     /// filters applied to clean text
@@ -121,13 +122,13 @@ export class EditPicturePage {
     // Take a picture saving in device, as jpg and allows edit
     this.camera.getPicture({
       quality: 100,
-      //destinationType: this.camera.DestinationType.NATIVE_URI,
+      destinationType: this.camera.DestinationType.NATIVE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       targetHeight: 1000,
       sourceType: 1,
       allowEdit: true,
-      //saveToPhotoAlbum: true,
-      //correctOrientation: true
+      saveToPhotoAlbum: true,
+      correctOrientation: true
     }).then((imageURI) => {
       loader.dismissAll();
 
