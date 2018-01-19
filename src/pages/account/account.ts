@@ -16,12 +16,14 @@ import { User } from '../../models/User';
   templateUrl: 'account.html',
 })
 export class AccountPage {
-
+  private user: User;
   constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, private _auth: AuthProvider) {
+  this.user = new User();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AccountPage');
+    
   }
   logout() {
     this._auth.logout();
@@ -36,15 +38,18 @@ export class AccountPage {
     });
     alert.addInput({
       name: 'oldPassword',
-      placeholder: 'Old Password'
+      placeholder: 'Old Password',
+      type: 'password'
     });
     alert.addInput({
       name: 'newPassword1',
-      placeholder: 'New Password'
+      placeholder: 'New Password',
+      type: 'password',
     });
     alert.addInput({
       name: 'newPassword1',
-      placeholder: 'Confirm New Password'
+      placeholder: 'Confirm New Password',
+      type: 'password',
     });
     alert.addButton({
       text: 'Ok',
