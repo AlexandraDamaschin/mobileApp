@@ -44,7 +44,7 @@ export class MyPhotosPage {
   public uri      : string	= 'http://masteringionic2.com/products/product-detail/s/mastering-ionic-2-e-book';
 
   constructor(public navCtrl: NavController, public zone: NgZone, public maps: GoogleMaps, public platform: Platform,
-     public geolocation: Geolocation, public viewCtrl: ViewController, public db: AngularFireDatabase) {
+     public geolocation: Geolocation, public viewCtrl: ViewController, public db: AngularFireDatabase, private socialSharing : SocialSharing) {
     this.markers = [];
 
   }
@@ -122,30 +122,30 @@ export class MyPhotosPage {
 
   shareViaFacebook()
   {
-    //  this.platform.ready()
-    //  .then(() =>
-    //  {
-    //     SocialSharing.canShareVia('com.apple.social.facebook', this.message, this.image, this.uri)
-    //     .then((data) =>
-    //     {
+     this.platform.ready()
+     .then(() =>
+     {
+        this.socialSharing.canShareVia('com.apple.social.facebook', this.message, this.image, this.uri)
+        .then((data) =>
+        {
 
-    //        SocialSharing.shareViaFacebook(this.message, this.image, this.uri)
-    //        .then((data) =>
-    //        {
-    //           console.log('Shared via Facebook');
-    //        })
-    //        .catch((err) =>
-    //        {
-    //           console.log('Was not shared via Facebook');
-    //        });
+           this.socialSharing.shareViaFacebook(this.message, this.image, this.uri)
+           .then((data) =>
+           {
+              console.log('Shared via Facebook');
+           })
+           .catch((err) =>
+           {
+              console.log('Was not shared via Facebook');
+           });
 
-    //     })
-    //     .catch((err) =>
-    //     {
-    //        console.log('Not able to be shared via Facebook');
-    //     });
+        })
+        .catch((err) =>
+        {
+           console.log('Not able to be shared via Facebook');
+        });
 
-    //  });
+     });
   }
 
     //open edit details page
