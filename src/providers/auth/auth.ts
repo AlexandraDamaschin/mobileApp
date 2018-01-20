@@ -18,6 +18,10 @@ export class AuthProvider {
     this.subscribeToUser();
   }
 
+  get user(): firebase.User{
+    return this._user;
+  }
+
   subscribeToUser() {
     this._firebaseAuth.authState.subscribe((user: firebase.User) => {
       this._events.publish(EventType.loading, new LoadingData(LoadingAction.hideAll));

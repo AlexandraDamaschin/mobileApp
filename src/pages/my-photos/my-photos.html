@@ -13,30 +13,19 @@
 
 <ion-content>
   <ion-list *ngFor="let item of dbData" [ngClass]="{'hidden': segment !== 'list'}">
-    <ion-card>
+    <ion-card *ngIf="item.email == this._auth.user.email">
       <ion-item>
         <ion-avatar item-start>
           <img src={{item.downloadURL}} />
         </ion-avatar>
         <h2>Marty McFly</h2>
         <p>November 5, 1955</p>
-        <div id="editButton" >
-          <button ion-button  (click)= "openEdit()" color="secondary" outline icon-start>
+        <div id="editButton">
+          <button ion-button (click)="openEdit()" color="secondary" outline icon-start>
             <ion-icon name="paw"></ion-icon>
             Edit
           </button>
-          </div>
-        <button
-        class="button"
-        ion-button
-        icon-right
-        block
-        padding-vertical
-        color="primary"
-        (click)="shareViaFacebook()">
-           Share this via Facebook
-           <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
-     </button>
+        </div>
       </ion-item>
       <img src={{item.downloadURL}} />
       <ion-card-content>
@@ -57,9 +46,15 @@
           </button>
         </ion-col>
         <ion-col center text-center>
-          <ion-note>
-            11h ago
-          </ion-note>
+            <ion-fab right bottom #fab>
+                <button ion-fab mini color="primary"><ion-icon ios="ios-share" md="md-share" ></ion-icon></button>
+                <ion-fab-list side="top">
+                  <button ion-fab (click)="share('facebook', fab)"><ion-icon name="logo-facebook"></ion-icon></button>
+                  <button ion-fab (click)="share('twitter', fab)"><ion-icon name="logo-twitter"></ion-icon></button>
+                  <button ion-fab (click)="share('instagram', fab)"><ion-icon name="logo-instagram"></ion-icon></button>
+                  <button ion-fab (click)="share($event, fab)"><ion-icon name="logo-googleplus"></ion-icon></button>
+                </ion-fab-list>
+              </ion-fab>
         </ion-col>
       </ion-row>
     </ion-card>
@@ -76,7 +71,7 @@
 
 
 <div id="infoWindow">
-  <img src="">
+  <img src>
   <p>blah blah</p>
   <p>more blah</p>
 </div>
