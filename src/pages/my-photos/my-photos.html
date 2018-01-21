@@ -20,12 +20,20 @@
         </ion-avatar>
         <h2>Marty McFly</h2>
         <p>November 5, 1955</p>
-        <div id="editButton">
+        <ion-fab right top class="top-right">
+            <button ion-fab mini color="primary"><i class="fa fa-pencil-square-o"></i></button>
+            <!-- <ion-fab-list side="top">
+              <button ion-fab (click)="share('facebook', fab)"><ion-icon name="logo-facebook"></ion-icon></button>
+              <button ion-fab (click)="share('twitter', fab)"><ion-icon name="logo-twitter"></ion-icon></button>
+              <button ion-fab (click)="share('instagram', fab)"><ion-icon name="logo-instagram"></ion-icon></button>
+              <button ion-fab (click)="share($event, fab)"><ion-icon name="logo-googleplus"></ion-icon></button>
+            </ion-fab-list> -->
+          </ion-fab>
+        <!-- <div id="editButton">
           <button ion-button (click)="openEdit()" color="secondary" outline icon-start>
-            <ion-icon name="paw"></ion-icon>
-            Edit
-          </button>
-        </div>
+              <i class="fa fa-pencil-square-o"></i>
+          </button> 
+        </div>-->
       </ion-item>
       <img src={{item.downloadURL}} />
       <ion-card-content>
