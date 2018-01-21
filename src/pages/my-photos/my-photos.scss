@@ -28,24 +28,26 @@ page-my-photos {
         justify-content: center;
         align-items: center;
     }
-    .hidden{
+    .hidden {
         display: none!important;
     }
-    .map-wrapper{
+    .map-wrapper {
         width: 100%;
         height: 100%;
     }
-    .scroll-content{
+    .scroll-content {
         overflow-y: scroll;
     }
-    #editButton{
+    #editButton {
         margin-left: 75%;
     }
-    .fa{
+    .fa {
         font-size: 1.5em;
     }
-    .top-right{
-        top: 0;
-        right: 0;
+    .top {
+        top: 5px;
+    }
+    .right {
+        right: 5px;
     }
 }
