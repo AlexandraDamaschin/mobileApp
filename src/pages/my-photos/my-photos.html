@@ -18,8 +18,8 @@
         <ion-avatar item-start>
           <img src={{item.downloadURL}} />
         </ion-avatar>
-        <h2>Marty McFly</h2>
-        <p>November 5, 1955</p>
+        <h2>User name goes here</h2>
+        <p>{{ item.date | fromUnix:'ddd, MMM Do YYYY, HH:MM'}}</p>
         <ion-fab right top class="top right">
             <button ion-fab mini color="secondary" (click)="openEdit()"><i class="fa fa-pencil-square-o"></i></button>
           </ion-fab>

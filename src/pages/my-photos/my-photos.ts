@@ -11,13 +11,16 @@ import * as _ from 'lodash';
 import * as moment from 'moment';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { AuthProvider } from '../../providers/auth/auth';
+// import { FromUnixPipe } from '../../pipes/from-unix/from-unix';
+import { PipesModule } from '../../pipes/pipes.module';
+
 
 declare var google;
 
 @IonicPage()
 @Component({
   selector: 'page-my-photos',
-  templateUrl: 'my-photos.html',
+  templateUrl: 'my-photos.html'
 })
 export class MyPhotosPage {
   dbData: Photo[];
@@ -159,6 +162,10 @@ export class MyPhotosPage {
       this.shareViaFacebook();
       break;
     }
+  }
+
+  parseMoment(unix: string): string{
+    return moment.unix(parseInt(unix)).format('ddd, MMM Do YYYY, HH:MM');
   }
 
 }
