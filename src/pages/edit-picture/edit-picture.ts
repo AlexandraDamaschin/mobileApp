@@ -13,11 +13,11 @@ export class EditPicturePage {
 
 //  @ViewChild('imageResult') private imageResult: ElementRef; // reference to DOM element
 
-  // image: string = '../assets/imgs/migrations.png';
+  image: string = '../assets/imgs/migrations.png';
   // _zone: any;
 
-  // brightness: number = 12;
-  // contrast: number = 52;
+   brightness: number = 12;
+   contrast: number = 52;
   // unsharpMask: any = { radius: 100, strength: 2 };
   // hue: number = -100;
   // saturation: number = -100;
@@ -87,32 +87,32 @@ export class EditPicturePage {
   //   }
   // }
 
-  // filter(image) {
+ filter(image) {
   //   /// Initialization of glfx.js
   //   /// is important, to use js memory elements
   //   /// access to Window element through (<any>window)
   //   try {
-  //     var canvas = (<any>window).fx.canvas();
+      var canvas = (<any>window).fx.canvas();
   //   } catch (e) {
   //     alert(e);
   //     return;
   //   }
 
-  //   /// taken from glfx documentation
-  //   var imageElem = this.imageResult.nativeElement; // another trick is acces to DOM element
+  //  /// taken from glfx documentation
+ var imageElem = this.image; // another trick is acces to DOM element
   //   //convert imageElem to a texture
-  //   var texture = canvas.texture(imageElem);
+     var texture = canvas.texture(imageElem);
 
   //   /// filters applied to clean text
-  //   canvas.draw(texture)
+    canvas.draw(texture)
   //     .hueSaturation(this.hue / 100, this.saturation / 100)//grayscale
   //     .unsharpMask(this.unsharpMask.radius, this.unsharpMask.strength)
-  //     .brightnessContrast(this.brightness / 100, this.contrast / 100)
+       .brightnessContrast(this.brightness / 100, this.contrast / 100)
   //     .update();
 
   //   /// replace image src 
   //   imageElem.src = canvas.toDataURL('image/png');
-  // }
+  }
 
   // takePicture() {
   //   let loader = this.loadingCtrl.create({
