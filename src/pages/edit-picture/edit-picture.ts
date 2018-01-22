@@ -12,8 +12,10 @@ import { IonicPage, NavController } from 'ionic-angular';
 export class EditPicturePage {
 
 //  @ViewChild('imageResult') private imageResult: ElementRef; // reference to DOM element
-
-  image: string = '../assets/imgs/migrations.png';
+@ViewChild('image') image;
+    // smileHeight: number = 250;
+    // image : any
+  //image: string = '../assets/imgs/migrations.png';
   // _zone: any;
 
    brightness: number = 12;
@@ -33,6 +35,8 @@ export class EditPicturePage {
   ) {
    // this._zone = new NgZone({ enableLongStackTrace: false });
   }
+
+  
 
   ionViewDidLoad() {
 
@@ -87,12 +91,20 @@ export class EditPicturePage {
   //   }
   // }
 
+  canvas1() {
+    console.log('canvas called.....');
+  }
+
  filter(image) {
+  console.log('filter called.....');
   //   /// Initialization of glfx.js
   //   /// is important, to use js memory elements
   //   /// access to Window element through (<any>window)
   //   try {
+
       var canvas = (<any>window).fx.canvas();
+   //   var image = document.getElementById('image');
+      var texture = canvas.texture(image);
   //   } catch (e) {
   //     alert(e);
   //     return;
@@ -109,9 +121,6 @@ export class EditPicturePage {
   //     .unsharpMask(this.unsharpMask.radius, this.unsharpMask.strength)
        .brightnessContrast(this.brightness / 100, this.contrast / 100)
   //     .update();
-
-  //   /// replace image src 
-  //   imageElem.src = canvas.toDataURL('image/png');
   }
 
   // takePicture() {
