@@ -40,12 +40,12 @@ export class EditPicturePage {
   
 
   ionViewDidLoad() {
-    let c: any;
-    c = document.getElementById("image2");
-    var ctx = c.getContext("2d");
-    ctx.moveTo(0,0);
-    ctx.lineTo(200,100);
-    ctx.stroke();
+    // let c: any;
+    // c = document.getElementById("image2");
+    // var ctx = c.getContext("2d");
+    // ctx.moveTo(0,0);
+    // ctx.lineTo(200,100);
+    // ctx.stroke();
   }
 
   /// Execute a menu 
@@ -102,33 +102,30 @@ export class EditPicturePage {
   }
 
  filter(image) {
-  let canvas: any;
-  c = document.getElementById("image");
+ // let canvas: any;
+  var canvas = fx.canvas();
+  //var image2 = document.getElementById('image');
+  var texture = canvas.texture(image);
   console.log('filter called.....');
   //   /// Initialization of glfx.js
   //   /// is important, to use js memory elements
   //   /// access to Window element through (<any>window)
   //   try {
-
-      var c = fx.canvas();
    //   var image = document.getElementById('image');
-      var texture = c.texture(image);
   //   } catch (e) {
   //     alert(e);
   //     return;
   //   }
 
-  //  /// taken from glfx documentation
- var imageElem = this.image; // another trick is acces to DOM element
-  //   //convert imageElem to a texture
-     var texture = c.texture(imageElem);
 
   //   /// filters applied to clean text
-    c.draw(texture)
+    canvas.draw(texture)
   //     .hueSaturation(this.hue / 100, this.saturation / 100)//grayscale
   //     .unsharpMask(this.unsharpMask.radius, this.unsharpMask.strength)
        .brightnessContrast(this.brightness / 100, this.contrast / 100)
-  //     .update();
+     .update();
+  image.parentNode.insertBefore(canvas, image);
+  image.parentNode.removeChild(image);
   }
 
   // takePicture() {

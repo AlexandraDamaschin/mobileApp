@@ -72,7 +72,7 @@
       </button>
     </ion-fab>
 </ion-content> -->
-<ion-content>
+<!-- <ion-content>
     <canvas id="image2" width="200" height="100" style="border:1px solid #000000;"  #image></canvas>
     <img id="image" src="../assets/imgs/template.png">
     <ion-item>
@@ -82,10 +82,10 @@
         <ion-icon range-right name="sunny"></ion-icon>
       </ion-range>
     </ion-item>
-  </ion-content>
+  </ion-content> -->
 <!-- 
 <script src="../assets/js/glfx.js"></script>
-
+-->
 <script>
 window.onload = function() {
   console.log('Windows.load');    // try to create a WebGL canvas (will fail if WebGL isn't supported)
@@ -114,4 +114,14 @@ window.onload = function() {
     image.parentNode.insertBefore(canvas, image);
     image.parentNode.removeChild(image);
 };
-</script> -->
+</script> 
+<img id="image" src="../assets/imgs/template.png">
+<ion-content>
+  <ion-item>
+    <ion-label id="image">Brightness</ion-label>
+    <ion-range min="-100" max="100" pin="true" step="1" (ionChange)="filter('../assets/imgs/migrations.png')" color="secondary">
+      <ion-icon range-left small name="sunny"></ion-icon>
+      <ion-icon range-right name="sunny"></ion-icon>
+    </ion-range>
+  </ion-item>
+</ion-content>
