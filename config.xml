@@ -90,4 +90,5 @@
         <variable name="APP_ID" value="422969994789166" />
         <variable name="APP_NAME" value="“ProjectAwesome&#xA;&#xA;&#xA;ionic cordova plugin add cordova-plugin-facebook4 --variable APP_ID=422969994789166 --variable APP_NAME=“ProjectAwesome" />
     </plugin>
+    <plugin name="cordova-plugin-brightness" spec="^0.1.5" />
 </widget>
