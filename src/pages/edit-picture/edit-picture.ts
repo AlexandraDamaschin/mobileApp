@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Photo } from '../../models/Photo';
+import { IonicPage, NavController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 /**
@@ -12,25 +11,34 @@ import { AngularFireDatabase } from 'angularfire2/database';
 var exec: any;
 var require: any;
 
+
 @IonicPage()
 @Component({
   selector: 'page-edit-picture',
   templateUrl: 'edit-picture.html',
 })
 export class EditPicturePage {
-  dbData: Photo[];
-  photos: any;
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
     public db: AngularFireDatabase) {
   }
 
   ionViewDidLoad() {
 
   }
-  
+
+filter (){
+  var jimp = require("jimp");
+// open a file called "lenna.png"
+jimp.read("../assets/imgs/migrations.png", function (err, lenna) {
+    if (err) throw err;
+    lenna.resize(256, 256)            // resize
+         .quality(60)                 // set JPEG quality
+         .greyscale()                 // set greyscale
+         .write("lena-small-bw.jpg"); // save
+});
+}
 
 // go back to my photos page
   onBackButton(){
