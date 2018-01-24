@@ -21,6 +21,7 @@
         "@angular/platform-browser": "5.0.1",
         "@angular/platform-browser-dynamic": "5.0.1",
         "@ionic-native/android-permissions": "^4.5.2",
+        "@ionic-native/brightness": "^4.5.2",
         "@ionic-native/core": "4.4.0",
         "@ionic-native/facebook": "^4.5.2",
         "@ionic-native/geolocation": "^4.5.2",
@@ -33,6 +34,7 @@
         "angularfire2": "^5.0.0-rc.4",
         "cordova-android": "7.0.0",
         "cordova-plugin-android-permissions": "^1.0.0",
+        "cordova-plugin-brightness": "^0.1.5",
         "cordova-plugin-device": "^1.1.4",
         "cordova-plugin-facebook4": "^1.9.1",
         "cordova-plugin-geolocation": "~3.0.0",
@@ -68,7 +70,8 @@
             "cordova-plugin-facebook4": {
                 "APP_ID": "422969994789166",
                 "APP_NAME": "“ProjectAwesome\n\n\nionic cordova plugin add cordova-plugin-facebook4 --variable APP_ID=422969994789166 --variable APP_NAME=“ProjectAwesome"
-            }
+            },
+            "cordova-plugin-brightness": {}
         },
         "platforms": [
             "android"
