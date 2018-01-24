@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 //import { Camera } from '@ionic-native/camera';
 //import { Platform, ActionSheetController, LoadingController } from 'ionic-angular';
-
+declare var canvas ;
 declare var fx;
 
 @IonicPage()
@@ -97,9 +97,6 @@ export class EditPicturePage {
   //   }
   // }
 
-  canvas1() {
-    console.log('canvas called.....');
-  }
 
  filter(image) {
  // let canvas: any;
@@ -123,9 +120,7 @@ export class EditPicturePage {
   //     .hueSaturation(this.hue / 100, this.saturation / 100)//grayscale
   //     .unsharpMask(this.unsharpMask.radius, this.unsharpMask.strength)
        .brightnessContrast(this.brightness / 100, this.contrast / 100)
-     .update();
-  image.parentNode.insertBefore(canvas, image);
-  image.parentNode.removeChild(image);
+      .update();
   }
 
   // takePicture() {
