@@ -126,26 +126,28 @@ export class MyPhotosPage {
   }
 
   shareViaFacebook() {
-    this.platform.ready()
-      .then(() => {
-        this.socialSharing.canShareVia('com.apple.social.facebook', this.message, this.image, this.uri)
-          .then((data) => {
-
-            this.socialSharing.shareViaFacebook(this.message, this.image, this.uri)
-              .then((data) => {
-                console.log('Shared via Facebook');
-              })
-              .catch((err) => {
-                console.log('Was not shared via Facebook');
-              });
-
-          })
-          .catch((err) => {
-            console.log(err);
-            console.log('Not able to be shared via Facebook');
-          });
-
+    this.socialSharing.shareViaFacebook(this.message, null, null)
+      .then((data) => {
+        console.log('Shared via Facebook');
+      })
+      .catch((err) => {
+        console.log("===========================" + JSON.stringify(err) + " ===========================") ;
+        console.log('Was not shared via Facebook');
       });
+    // this.platform.ready()
+    //   .then(() => {
+    //     this.socialSharing.canShareVia('com.apple.social.facebook', this.message, this.image, this.uri)
+    //       .then((data) => {
+
+
+
+    //       })
+    //       .catch((err) => {
+    //         console.log(err);
+    //         console.log('Not able to be shared via Facebook');
+    //       });
+
+    //   });
   }
 
   //open edit details page
@@ -156,15 +158,15 @@ export class MyPhotosPage {
   share(type: string, fab: FabContainer) {
     console.log("share to " + type);
     fab.close();
-    switch (type){
+    switch (type) {
       case "facebook":
-      //pass the image ref as well
-      this.shareViaFacebook();
-      break;
+        //pass the image ref as well
+        this.shareViaFacebook();
+        break;
     }
   }
 
-  parseMoment(unix: string): string{
+  parseMoment(unix: string): string {
     return moment.unix(parseInt(unix)).format('ddd, MMM Do YYYY, HH:MM');
   }
 
