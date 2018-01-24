@@ -9,6 +9,7 @@ import { Photo } from '../../models/Photo';
 import { Geolocation } from '@ionic-native/geolocation';
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import {EditPicturePage} from '../edit-picture/edit-picture';
 
 
 declare var google;
@@ -122,7 +123,11 @@ export class MyPhotosPage {
 
   //open edit details page
   openEdit() {
-    this.navCtrl.push('EditPicturePage')
+    let pictures = this.db.list<Photo>('capturedPhotos/').valueChanges().subscribe((res: Photo[]) => {
+      this.dbData = res;
+    });
+
+    this.navCtrl.push('EditPicturePage', {photos:pictures });
   }
 
 }
