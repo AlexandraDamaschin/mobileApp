@@ -32,6 +32,7 @@
         "@types/google-maps": "^3.2.0",
         "@types/lodash": "^4.14.91",
         "angularfire2": "^5.0.0-rc.4",
+        "buffer": "^5.0.8",
         "cordova-android": "7.0.0",
         "cordova-plugin-android-permissions": "^1.0.0",
         "cordova-plugin-brightness": "^0.1.5",
@@ -54,6 +55,7 @@
     },
     "devDependencies": {
         "@ionic/app-scripts": "3.1.2",
+        "@types/node": "^9.3.0",
         "typescript": "2.4.2"
     },
     "description": "An Ionic project",

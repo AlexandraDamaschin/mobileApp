@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
+import {Buffer} from 'buffer';
+import * as jimp from 'jimp';
 
 /**
  * Generated class for the EditPicturePage page.
@@ -8,8 +10,8 @@ import { AngularFireDatabase } from 'angularfire2/database';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var exec: any;
-var require: any;
+// var exec: any;
+ var require: any;
 
 
 @IonicPage()
