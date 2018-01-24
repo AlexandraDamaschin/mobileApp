@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Photo } from '../../models/Photo';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Brightness } from '@ionic-native/brightness';
 
 /**
  * Generated class for the EditPicturePage page.
@@ -23,7 +22,6 @@ export class EditPicturePage {
   photos: any;
 
   constructor(
-    private brightness: Brightness,
     public navCtrl: NavController,
     public navParams: NavParams,
     public db: AngularFireDatabase) {
@@ -33,10 +31,6 @@ export class EditPicturePage {
 
   }
   
-  filter(image){
-    let brightnessValue: number = 0.8;
-    this.brightness.setBrightness(brightnessValue);
-  }
 
 // go back to my photos page
   onBackButton(){
