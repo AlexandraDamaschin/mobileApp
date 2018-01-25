@@ -18,13 +18,13 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class EditPicturePage {
   dbData: Photo[];
   photos: any;
-  item: any;
+  imageURL: string;
   slides:any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public db: AngularFireDatabase) {
-      this.item = '';
+      this.imageURL = '';
   }
 
   ionViewDidLoad() {
@@ -33,8 +33,8 @@ export class EditPicturePage {
 
   // load clicked image from my- images page 
   loadImage(){
-  this.item  = this.navParams.get('image');
-   console.log(this.item);
+  this.imageURL  = this.navParams.get('imageURL');
+   console.log(this.imageURL);
   }
 // go back to my photos page
   onBackButton(){

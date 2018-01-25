@@ -9,7 +9,7 @@ import { Photo } from '../../models/Photo';
 import { Geolocation } from '@ionic-native/geolocation';
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import {EditPicturePage} from '../edit-picture/edit-picture';
+import { EditPicturePage } from '../edit-picture/edit-picture';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { AuthProvider } from '../../providers/auth/auth';
 // import { FromUnixPipe } from '../../pipes/from-unix/from-unix';
@@ -43,13 +43,8 @@ export class MyPhotosPage {
   mapLoaded: any;
 
   constructor(
-    public navCtrl: NavController,
-     public zone: NgZone,
-      public maps: GoogleMaps,
-       public platform: Platform,
-    public geolocation: Geolocation,
-    public viewCtrl: ViewController,
-     public db: AngularFireDatabase) {
+    public navCtrl: NavController, public zone: NgZone, public maps: GoogleMaps, public platform: Platform,
+    public geolocation: Geolocation, public viewCtrl: ViewController, public db: AngularFireDatabase, private _auth: AuthProvider) {
     this.markers = [];
 
   }
@@ -126,9 +121,9 @@ export class MyPhotosPage {
     this.markers = [];
   }
 
-    //open edit details page
-    openEdit(){
-      this.navCtrl.push('EditPicturePage')
-    }
+  //open edit details page
+  openEdit(imageURL: string) {
+    this.navCtrl.push('EditPicturePage', {imageURL: imageURL})
+  }
 
 }
