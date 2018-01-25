@@ -20,6 +20,7 @@ export class EditPicturePage {
   photos: any;
   item: any;
   slides:any;
+  
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,

@@ -124,7 +124,6 @@ export class MyPhotosPage {
   //open edit details page
   openEdit(url : string) {
       let item= this.dbData ;
-
     this.navCtrl.push('EditPicturePage', {image:url});
   }
 
