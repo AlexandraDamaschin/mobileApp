@@ -10,10 +10,10 @@
   <ion-item >
   <img id="mainImage" src={{item}}>
 </ion-item>
-<ion-footer>
-    <img id="blackWhiteImg" src={{item}}>
-    <img id="contrasImg" src={{item}}>
-    <img id="sepiaImg" src={{item}}>
-    <img id="shadowImg" src={{item}}>
-</ion-footer>
+<ion-item>
+    <input id="blackWhiteImg" type="image" src={{item}} (click)="blackWhiteFilter()" />
+    <input id="contrasImg" type="image" src={{item}} (click)="contrastFilter()"/>
+    <input id="sepiaImg" type="image" src={{item}} (click)="sepiaFilter()"/>
+    <input id="shadowImg"type="image"  src={{item}} (click)="shadowFilter()"/>
+</ion-item>
 </ion-content>

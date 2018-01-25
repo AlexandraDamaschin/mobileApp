@@ -30,13 +30,30 @@ export class EditPicturePage {
     this.loadImage();
   }
 
+  // load clicked image from my- images page 
   loadImage(){
   this.item  = this.navParams.get('image');
-   console.log(this.item)
+   console.log(this.item);
+  }
+  // blackWhiteFilter
+  blackWhiteFilter(){
+    console.log('blackWhiteFilter called');
+  }
+  //contrastFilter
+  contrastFilter(){
+    console.log('contrastFilter called');
+  }
+  //sepiaFilter
+  sepiaFilter(){
+    console.log('sepiaFilter called');
+  }
+  //shadowFilter
+  shadowFilter(){
+    console.log('shadowFilter called');
   }
   
 // go back to my photos page
   onBackButton(){
-    this.navCtrl.push('MyPhotosPage')
+    this.navCtrl.pop();
   }
 }
