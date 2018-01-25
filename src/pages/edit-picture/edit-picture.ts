@@ -19,6 +19,7 @@ export class EditPicturePage {
   dbData: Photo[];
   photos: any;
   item: any;
+  slides:any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -35,23 +36,6 @@ export class EditPicturePage {
   this.item  = this.navParams.get('image');
    console.log(this.item);
   }
-  // blackWhiteFilter
-  blackWhiteFilter(){
-    console.log('blackWhiteFilter called');
-  }
-  //contrastFilter
-  contrastFilter(){
-    console.log('contrastFilter called');
-  }
-  //sepiaFilter
-  sepiaFilter(){
-    console.log('sepiaFilter called');
-  }
-  //shadowFilter
-  shadowFilter(){
-    console.log('shadowFilter called');
-  }
-  
 // go back to my photos page
   onBackButton(){
     this.navCtrl.pop();

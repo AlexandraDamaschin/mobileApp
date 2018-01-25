@@ -4,26 +4,19 @@ page-edit-picture {
   
     }
     #blackWhiteImg{
-    width: 23mm;
-    height: 18mm;
       // black and white filter
       -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
       filter: grayscale(100%);  
     }
     #contrasImg{
-        padding:0; margin:0;
-        width: 23mm;
-        height: 18mm;
         -webkit-filter: contrast(200%); /* Safari */
         filter: contrast(200%);
     }
-    #sepiaImg{width: 23mm;
-        height: 18mm;
+    #sepiaImg{
         -webkit-filter: sepia(100%); /* Safari */
         filter: sepia(100%);
     }
-    #shadowImg{width: 23mm;
-        height: 18mm;
+    #shadowImg{
         -webkit-filter: drop-shadow(8px 8px 10px gray); /* Safari */
     filter: drop-shadow(8px 8px 10px gray);
     }

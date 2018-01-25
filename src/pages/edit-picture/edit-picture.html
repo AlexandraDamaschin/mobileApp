@@ -7,13 +7,24 @@
 </ion-header>
 
 <ion-content >
-  <ion-item >
+    <ion-slides
+    (ionSlideDidChange)="slideChanged()">
+  <ion-slide>
   <img id="mainImage" src={{item}}>
-</ion-item>
-<ion-item>
-    <input id="blackWhiteImg" type="image" src={{item}} (click)="blackWhiteFilter()" />
-    <input id="contrasImg" type="image" src={{item}} (click)="contrastFilter()"/>
-    <input id="sepiaImg" type="image" src={{item}} (click)="sepiaFilter()"/>
-    <input id="shadowImg"type="image"  src={{item}} (click)="shadowFilter()"/>
-</ion-item>
+  </ion-slide>
+<!-- <ion-item></ion-item> -->
+<ion-slide>
+   <input id="blackWhiteImg" type="image" src={{item}} />
+  </ion-slide>
+  <ion-slide>
+   <input id="contrasImg" type="image" src={{item}}/>
+  </ion-slide> 
+  <ion-slide>
+   <input id="sepiaImg" type="image" src={{item}} />
+  </ion-slide> 
+  <ion-slide>
+   <input id="shadowImg"type="image"  src={{item}}/>
+  </ion-slide>
+  </ion-slides>
+   <!-- </ion-item> -->
 </ion-content>
