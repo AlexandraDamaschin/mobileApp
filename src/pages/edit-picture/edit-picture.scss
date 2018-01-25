@@ -1,3 +1,23 @@
 page-edit-picture {
 
+    #mainImage {
+  
+    }
+    #blackWhiteImg{
+      // black and white filter
+      -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+      filter: grayscale(100%);  
+    }
+    #contrasImg{
+        -webkit-filter: contrast(200%); /* Safari */
+        filter: contrast(200%);
+    }
+    #sepiaImg{
+        -webkit-filter: sepia(100%); /* Safari */
+        filter: sepia(100%);
+    }
+    #shadowImg{
+        -webkit-filter: drop-shadow(8px 8px 10px gray); /* Safari */
+    filter: drop-shadow(8px 8px 10px gray);
+    }
 }

@@ -83,8 +83,4 @@ export class AllPhotosPage {
     console.log(data);
   }
 
-  //open edit details page
-  openEdit(){
-    this.navCtrl.push('EditPicturePage')
-  }
 }

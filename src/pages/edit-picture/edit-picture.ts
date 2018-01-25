@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Photo } from '../../models/Photo';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 /**
  * Generated class for the EditPicturePage page.
@@ -14,14 +16,28 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'edit-picture.html',
 })
 export class EditPicturePage {
-
+  dbData: Photo[];
+  photos: any;
+  item: any;
+  slides:any;
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams) {
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public db: AngularFireDatabase) {
+      this.item = '';
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad EditPicturePage');
+    this.loadImage();
   }
 
+  // load clicked image from my- images page 
+  loadImage(){
+  this.item  = this.navParams.get('image');
+   console.log(this.item);
+  }
+// go back to my photos page
+  onBackButton(){
+    this.navCtrl.pop();
+  }
 }
