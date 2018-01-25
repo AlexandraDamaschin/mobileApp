@@ -19,12 +19,12 @@ export class EditPicturePage {
   dbData: Photo[];
   photos: any;
   imageURL: string;
-  slides:any;
+  slides: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public db: AngularFireDatabase) {
-      this.imageURL = '';
+    this.imageURL = '';
   }
 
   ionViewDidLoad() {
@@ -32,12 +32,16 @@ export class EditPicturePage {
   }
 
   // load clicked image from my- images page 
-  loadImage(){
-  this.imageURL  = this.navParams.get('imageURL');
-   console.log(this.imageURL);
+  loadImage() {
+    this.imageURL = this.navParams.get('imageURL');
+    console.log(this.imageURL);
   }
-// go back to my photos page
-  onBackButton(){
+
+  uploadEditPicture() {
+    console.log('uploadEditPicture called');
+  }
+  // go back to my photos page
+  onBackButton() {
     this.navCtrl.pop();
   }
 }
