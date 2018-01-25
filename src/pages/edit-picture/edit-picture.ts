@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Photo } from '../../models/Photo';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { FireDbProvider } from '../../providers/fire-db/fire-db';
 
 /**
  * Generated class for the EditPicturePage page.
@@ -27,7 +26,11 @@ export class EditPicturePage {
   }
 
   ionViewDidLoad() {
-    let picture= this.navParams.get(this.photos);
+    this.loadImage();
+  }
+
+  loadImage(){
+   var picture = this.navParams.get(image);
   }
   
 // go back to my photos page

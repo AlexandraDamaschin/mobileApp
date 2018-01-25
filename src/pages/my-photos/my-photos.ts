@@ -122,12 +122,12 @@ export class MyPhotosPage {
   }
 
   //open edit details page
-  openEdit() {
-    let pictures = this.db.list<Photo>('capturedPhotos/').valueChanges().subscribe((res: Photo[]) => {
-      this.dbData = res;
-    });
+  openEdit(image) {
+    this.loadData();
+      let item= this.dbData ;
+    // });
 
-    this.navCtrl.push('EditPicturePage', {photos:pictures });
+    this.navCtrl.push('EditPicturePage', {image:item});
   }
 
 }
