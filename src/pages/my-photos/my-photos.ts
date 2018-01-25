@@ -42,8 +42,14 @@ export class MyPhotosPage {
   location: any;
   mapLoaded: any;
 
-  constructor(public navCtrl: NavController, public zone: NgZone, public maps: GoogleMaps, public platform: Platform,
-    public geolocation: Geolocation, public viewCtrl: ViewController, public db: AngularFireDatabase) {
+  constructor(
+    public navCtrl: NavController,
+     public zone: NgZone,
+      public maps: GoogleMaps,
+       public platform: Platform,
+    public geolocation: Geolocation,
+    public viewCtrl: ViewController,
+     public db: AngularFireDatabase) {
     this.markers = [];
 
   }

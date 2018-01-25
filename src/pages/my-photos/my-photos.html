@@ -18,18 +18,10 @@
         <ion-avatar item-start>
           <img src={{item.downloadURL}} />
         </ion-avatar>
-        <h2>Marty McFly</h2>
-        <p>November 5, 1955</p>
-        <div id="editButton" >
-          <button ion-button  (click)= "openEdit(item.downloadURL)" color="secondary" outline icon-start>
-            <ion-icon name="paw"></ion-icon>
-            Edit
-          </button>
-          </div>
         <h2>User name goes here</h2>
         <p>{{ item.date | fromUnix:'ddd, MMM Do YYYY, HH:MM'}}</p>
         <ion-fab right top class="top right">
-            <button ion-fab mini color="secondary" (click)="openEdit()"><i class="fa fa-pencil-square-o"></i></button>
+            <button ion-fab mini color="secondary" (click)="openEdit(item.downloadURL)"><i class="fa fa-pencil-square-o"></i></button>
           </ion-fab>
       </ion-item>
       <img src={{item.downloadURL}} />
