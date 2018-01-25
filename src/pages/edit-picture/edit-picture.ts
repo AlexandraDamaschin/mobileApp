@@ -18,11 +18,12 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class EditPicturePage {
   dbData: Photo[];
   photos: any;
-
+  item: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public db: AngularFireDatabase) {
+      this.item = '';
   }
 
   ionViewDidLoad() {
@@ -30,7 +31,8 @@ export class EditPicturePage {
   }
 
   loadImage(){
-   var picture = this.navParams.get(image);
+  this.item  = this.navParams.get('image');
+   console.log(this.item)
   }
   
 // go back to my photos page

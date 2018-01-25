@@ -68,7 +68,6 @@ export class MyPhotosPage {
     this.db.list<Photo>('capturedPhotos/').valueChanges().subscribe((res: Photo[]) => {
       this.dbData = res;
       this.plotPins(res);
-      this.openEdit(res);
     }, (error: Response) => { console.log("no auth") });
   }
 
@@ -101,7 +100,7 @@ export class MyPhotosPage {
     let contentString = `
     <div id="content"><h1>${date}</h1>
       <div id="bodyContent">
-        <img src="${p.downloadURL}" width="250">
+        <img src="${p.downloadURL}" width="250"> 
         <p>${p.address}</p>
       </div>
     </div>`;
@@ -123,11 +122,10 @@ export class MyPhotosPage {
   }
 
   //open edit details page
-  openEdit(res:Photo[]) {
+  openEdit(url : string) {
       let item= this.dbData ;
-    // });
 
-    this.navCtrl.push('EditPicturePage', {image:item});
+    this.navCtrl.push('EditPicturePage', {image:url});
   }
 
 }
