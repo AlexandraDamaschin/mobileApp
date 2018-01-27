@@ -51,9 +51,6 @@ export class MyPhotosPage {
   ionViewDidLoad(): void {
     this.loadData();
     let mapLoaded = this.maps.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement).then(() => {
-      // this.autocompleteService = new google.maps.places.AutocompleteService();
-      // this.placesService = new google.maps.places.PlacesService(this.maps.map);
-      // this.searchDisabled = false;
     });
   }
 

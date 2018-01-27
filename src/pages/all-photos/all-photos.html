@@ -1,58 +1,8 @@
-<ion-header>
-    <ion-toolbar>
-      <ion-segment [(ngModel)]="segment">
-        <ion-segment-button value="list">
-          <ion-icon name="list"></ion-icon>
-        </ion-segment-button>
-        <ion-segment-button value="map">
-          <ion-icon name="map"></ion-icon>
-        </ion-segment-button>
-      </ion-segment>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content>
-    <ion-list *ngFor="let item of dbData" [ngClass]="{'hidden': segment !== 'list'}">
-      <ion-card>
-        <ion-item>
-          <ion-avatar item-start>
-            <img src={{item.downloadURL}} />
-          </ion-avatar>
-          <h2>Marty McFly</h2>
-          <p>November 5, 1955</p>
-        </ion-item>
-        <img src={{item.downloadURL}} />
-        <ion-card-content>
-          <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?!
-            Whoa. This is heavy.</p>
-        </ion-card-content>
-        <ion-row>
-          <ion-col>
-            <button ion-button icon-left clear small>
-              <ion-icon name="thumbs-up"></ion-icon>
-              <div>12 Likes</div>
-            </button>
-          </ion-col>
-          <ion-col>
-            <button ion-button icon-left clear small>
-              <ion-icon name="text"></ion-icon>
-              <div>4 Comments</div>
-            </button>
-          </ion-col>
-          <ion-col center text-center>
-            <ion-note>
-              11h ago
-            </ion-note>
-          </ion-col>
-        </ion-row>
-      </ion-card>
-    </ion-list>
-  
-    <div #mapall id="map" [ngClass]="{'hidden': segment !== 'map', 'map-wrapper': true}">
-      <ion-spinner></ion-spinner>
-    </div>
-    <div #pleaseConnect id="please-connect">
-      <p>Please connect to the Internet...</p>
-    </div>
-    <!-- </div> -->
-  </ion-content>
+<ion-content>
+  <div #mapall id="map" [ngClass]="{'hidden': segment !== 'map', 'map-wrapper': true}">
+    <ion-spinner></ion-spinner>
+  </div>
+  <div #pleaseConnect id="please-connect">
+    <p>Please connect to the Internet...</p>
+  </div>
+</ion-content>

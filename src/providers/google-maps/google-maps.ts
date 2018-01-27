@@ -109,8 +109,8 @@ export class GoogleMaps {
     let n = new MapEvent(MapAction.zoomChanged);
     n.newZoom = newZoomLevel;
     n.oldZoom = this._currentZoom;
-    this._currentZoom = newZoomLevel;
     this._notification.notify(EventType.map, n);
+    this._currentZoom = newZoomLevel;
   }
 
   addCenterPin(latLng) {
