@@ -21,6 +21,8 @@ import { Network } from '@ionic-native/network';
 import { Geolocation } from '@ionic-native/geolocation';
 import { NotificationProvider } from '../providers/notification/notification';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { UserDetailsService } from '../providers/user-details/user-details';
+import { HttpModule } from '@angular/http';
 
 
 @NgModule({
@@ -30,6 +32,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HttpModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
@@ -45,6 +48,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     FirebaseImagesProvider,
     AuthProvider,
     FireDbProvider,
+    UserDetailsService,
     GoogleMaps,
     ConnectivityService,
     Network,

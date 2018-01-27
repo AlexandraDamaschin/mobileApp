@@ -6,22 +6,28 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { EventType, LoadingAction } from '../../models/Enum';
 import { LoadingData } from '../../models/common';
+import { UserDetailsService } from '../user-details/user-details';
+import { FireDbProvider } from '../fire-db/fire-db';
 
 
 
 @Injectable()
 export class AuthProvider {
   private _user: firebase.User;
+  private _userDetails: any;
 
-  constructor(private _firebaseAuth: AngularFireAuth, private _events: Events) {
+  constructor(private _firebaseAuth: AngularFireAuth, private _events: Events, private _userDetailsService: UserDetailsService, private _fireDB:FireDbProvider) {
     this._events.publish(EventType.loading, new LoadingData(LoadingAction.show));
     this.subscribeToUser();
   }
 
   get user(): firebase.User{
+
     return this._user;
   }
-
+  get userDetails() {
+    return this._userDetails;
+  }
   subscribeToUser() {
     this._firebaseAuth.authState.subscribe((user: firebase.User) => {
       this._events.publish(EventType.loading, new LoadingData(LoadingAction.hideAll));
@@ -29,6 +35,29 @@ export class AuthProvider {
       if (user) {
         this._events.publish(EventType.navigate, { page: 'TabsPage' });
         this._user = user;
+        console.log('>>>');
+        console.log(user.uid);
+       
+       
+        // this._fireDB.getUserDetails(user.uid).subscribe((res: any) => {
+        //   // console.log(res);
+        //   this._userDetails = res;
+        //   console.log('......');
+        //   console.log(this._userDetails);
+        // });
+
+
+
+        // this._userDetailsService.getUserDetails(user.uid).subscribe((res: any) => {
+        //   this._userDetails = res;
+        // });
+        // this._fireDB.getUserDetails(user.uid).subscribe((res: any) => {
+        //   this._userDetails = res;
+        // });
+
+        this._userDetails = this._fireDB.getUserDetails(user.uid);
+           console.log('......');
+          console.log(this._userDetails);
       }
       else {
         //unauthenticated
@@ -38,6 +67,7 @@ export class AuthProvider {
         }
         this._events.publish(EventType.navigate, { page: 'LoginPage' });
         this._user = null;
+        this._userDetails = null;
       }
     });
   }
@@ -84,9 +114,16 @@ export class AuthProvider {
 
       this._firebaseAuth.app.database().ref('users/' + res.uid).set(user).then(() => {
         this._events.publish(EventType.toast, { msg: 'Registration Successful' });
+     
+        this._userDetailsService.createUser(user).subscribe(uData => {
+          }, )
+    //  console.log('+++++=============>>>>');
+    //  console.log(this._fireDB.getUserDetails(user.uid));
       }).catch(err => {
         this._events.publish(EventType.error, err);
       });
+
+
 
     }).catch(err => {
       this._events.publish(EventType.error, err);
