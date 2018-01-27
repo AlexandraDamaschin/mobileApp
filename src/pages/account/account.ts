@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { AuthProvider } from '../../providers/auth/auth';
 import { User } from '../../models/User';
 import { FireDbProvider } from '../../providers/fire-db/fire-db';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 /**
  * Generated class for the AccountPage page.
@@ -44,11 +45,6 @@ export class AccountPage {
       ]
     });
     alert.addInput({
-      name: 'oldPassword',
-      placeholder: 'Old Password',
-      type: 'password'
-    });
-    alert.addInput({
       name: 'newPassword1',
       placeholder: 'New Password',
       type: 'password',
@@ -62,7 +58,43 @@ export class AccountPage {
       text: 'Ok',
       handler: (data: any) => {
        console.log("write logic change password")
-       this._auth.updatePassword(<string>data.newPassword1)
+       if(<string>data.newPassword1==<string>data.newPassword2)
+       {
+       this._auth.updatePassword(<string>data.newPassword1).then(() => {
+      })
+      .catch(err => {
+      console.log(err);
+      let alert = this.alertCtrl.create({
+        title: 'Ooops!',
+        subTitle: err.message   
+      });
+      alert.addButton({
+        text: 'Ok',
+        handler: () => {
+            this.changePassword();
+        }
+      
+      });
+      alert.present();  
+      });
+       
+       }
+       else {
+          let alert = this.alertCtrl.create({
+            title: 'Mismatched Passwords',
+            subTitle: 'Please enter new password again'
+            //,
+           // buttons: ['Dismiss']
+          });
+          alert.addButton({
+            text: 'Ok',
+            handler: () => {
+                this.changePassword();
+            }
+          });
+      
+          alert.present();  
+       }
       }
     });
 
