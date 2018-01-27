@@ -19,11 +19,12 @@ import { FireDbProvider } from '../../providers/fire-db/fire-db';
 export class AccountPage {
   private user: User;
   private Test: string;
+  private string 
 
   constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, private _auth: AuthProvider, private _fireDB:FireDbProvider) {
   this.user = new User();
   this._auth.subscribeToUser();
-  this.Test = this._auth.userDetails;
+ 
   }
 
   ionViewDidLoad() {
@@ -65,6 +66,30 @@ export class AccountPage {
     });
 
     alert.present();
+  }
+
+  changeUsername(){
+    let alert = this.alertCtrl.create({
+      title: 'Change Username',
+      buttons: [
+        'Cancel'
+      ]
+    });
+    alert.addInput({
+      name: 'UserName',
+      value: this._auth.userDetails.userName,
+      type: 'string'
+    });
+    alert.addButton({
+      text: 'Ok',
+      handler: (data: any) => {
+        this._auth.updateUserDetails(this._auth.userDetails.uid,<string>data.UserName)
+       console.log("write logic change password")
+      }
+    });
+
+    alert.present();
+   
   }
 
 }

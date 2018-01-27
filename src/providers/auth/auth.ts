@@ -119,4 +119,10 @@ export class AuthProvider {
     // })
     return this._db.object<User>(`users/${uid}`).valueChanges();
   }
+
+  updateUserDetails(uid: string, userName : string): void {
+    this._db.object<User>(`users/${uid}`).update({userName: userName}).then(res => {
+  
+    })
+ }
 }
