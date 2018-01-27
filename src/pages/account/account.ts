@@ -54,7 +54,7 @@ export class AccountPage {
       type: 'password',
     });
     alert.addInput({
-      name: 'newPassword1',
+      name: 'newPassword2',
       placeholder: 'Confirm New Password',
       type: 'password',
     });
@@ -62,6 +62,7 @@ export class AccountPage {
       text: 'Ok',
       handler: (data: any) => {
        console.log("write logic change password")
+       this._auth.updatePassword(<string>data.newPassword1)
       }
     });
 

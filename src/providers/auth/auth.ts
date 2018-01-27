@@ -123,6 +123,11 @@ export class AuthProvider {
   updateUserDetails(uid: string, userName : string): void {
     this._db.object<User>(`users/${uid}`).update({userName: userName}).then(res => {
   
-    })
+    })    
  }
+
+ updatePassword(password: string): Promise<any> {
+   var user = firebase.auth().currentUser;
+   return user.updatePassword(password);
+}
 }
