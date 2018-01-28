@@ -40,27 +40,22 @@ export class AllPhotosPage {
   location: any;
   mapLoaded: any;
   private _markers: any[];
+  private _pageName: string;
 
 
   constructor(public navCtrl: NavController, public zone: NgZone, public maps: GoogleMaps, public platform: Platform,
     public geolocation: Geolocation, public viewCtrl: ViewController, public db: AngularFireDatabase, private _notification: NotificationProvider) {
     _notification.emitter.subscribe((data) => {
-      if (data.type === EventType.map && this.navCtrl.getActive().name == 'AllPhotosPage')
+      if (data.type === EventType.map && this._pageName == 'AllPhotosPage')
         this.mapZoomChanged(data.obj);
     })
   }
   ionViewDidLoad(): void {
     this.loadData();
-
+    this._pageName = this.navCtrl.getActive().name;    
     let mapLoaded = this.maps.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement).then(() => {
     });
   }
-
-  ionViewDidEnter() {
-    console.log(this.navCtrl.getActive().name);
-
-  }
-
 
   loadData() {
     this.db.list<Photo>('capturedPhotos/').valueChanges().subscribe((res: Photo[]) => {
