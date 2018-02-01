@@ -126,6 +126,18 @@ export class MyPhotosPage {
   }
 
 
+  shareViaInstagram(image:string)
+  {
+    this.socialSharing.shareViaInstagram(this.message, image)
+    .then((data) => {
+      console.log('Shared via Facebook');
+    })
+    .catch((err) => {
+      console.log("===========================" + JSON.stringify(err) + " ===========================") ;
+      console.log('Was not shared via Facebook');
+    });
+  }
+
   shareViaFacebook(image:string)
   {
     this.socialSharing.shareViaFacebook(this.message, image, null)
@@ -137,6 +149,28 @@ export class MyPhotosPage {
       console.log('Was not shared via Facebook');
     });
   }
+
+  shareViaTwitter(image:string)
+  {
+  //  this.socialSharing.canShareVia("twitter")
+  //     .then((data) => {
+        this.socialSharing.shareViaTwitter(this.message, image, null)
+          .then((data) => {
+            console.log('Shared via Twitter');
+          })
+          .catch((err) => {
+            console.log("===========================" + JSON.stringify(err) + " ===========================");
+            console.log('Was not shared via Twitter');
+    //       })
+    // .catch ((err) => {
+    //       console.log(err);
+    //       console.log('Not able to be shared via Twitter, have you installed the app');
+    //     });
+      });
+
+  }
+
+  
 
   //open edit details page
   openEdit(imageURL: string) {
