@@ -42,11 +42,18 @@ export class MyPhotosPage {
   location: any;
   mapLoaded: any;
 
+
+  public sendTo   : any;
+  public subject  : string = 'Message from Social Sharing App';
+  public message  : string ;
+  public image    : string = 'http://masteringionic2.com/perch/resources/mastering-ionic-2-cover-1-w320.png';
+  public uri      : string = 'http://masteringionic2.com/products/product-detail/s/mastering-ionic-2-e-book';
+
   constructor(
     public navCtrl: NavController, public zone: NgZone, public maps: GoogleMaps, public platform: Platform,
-    public geolocation: Geolocation, public viewCtrl: ViewController, public db: AngularFireDatabase, private _auth: AuthProvider) {
+    public geolocation: Geolocation, public viewCtrl: ViewController, public db: AngularFireDatabase, private _auth: AuthProvider,private socialSharing : SocialSharing) {
     this.markers = [];
-
+    this.message = "I'm using the SALLI Box";
   }
   ionViewDidLoad(): void {
     this.loadData();
@@ -116,6 +123,19 @@ export class MyPhotosPage {
       this.markers[i].setMap(null);
     }
     this.markers = [];
+  }
+
+
+  shareViaFacebook(image:string)
+  {
+    this.socialSharing.shareViaFacebook(this.message, image, null)
+    .then((data) => {
+      console.log('Shared via Facebook');
+    })
+    .catch((err) => {
+      console.log("===========================" + JSON.stringify(err) + " ===========================") ;
+      console.log('Was not shared via Facebook');
+    });
   }
 
   //open edit details page

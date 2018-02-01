@@ -46,7 +46,7 @@
             <ion-fab right bottom #fab class="right">
                 <button ion-fab mini color="primary"><ion-icon ios="ios-share" md="md-share" ></ion-icon></button>
                 <ion-fab-list side="top">
-                  <button ion-fab (click)="share('facebook', fab)"><ion-icon name="logo-facebook"></ion-icon></button>
+                  <button ion-fab (click)="shareViaFacebook(item.downloadURL)"><ion-icon name="logo-facebook"></ion-icon></button>
                   <button ion-fab (click)="share('twitter', fab)"><ion-icon name="logo-twitter"></ion-icon></button>
                   <button ion-fab (click)="share('instagram', fab)"><ion-icon name="logo-instagram"></ion-icon></button>
                   <button ion-fab (click)="share($event, fab)"><ion-icon name="logo-googleplus"></ion-icon></button>
