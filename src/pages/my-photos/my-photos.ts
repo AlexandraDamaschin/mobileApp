@@ -1,7 +1,7 @@
 import { GoogleMaps } from '../../providers/google-maps/google-maps';
 import { AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Component, ElementRef, NgZone, ViewChild } from '@angular/core';
-import { Platform, ViewController, IonicPage, NavController, FabContainer } from 'ionic-angular';
+import { Platform, ViewController, IonicPage, NavController, FabContainer, AlertController } from 'ionic-angular';
 import { FireDbProvider } from '../../providers/fire-db/fire-db';
 import { AngularFireAction, AngularFireDatabase, DatabaseSnapshot } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
@@ -49,7 +49,7 @@ export class MyPhotosPage {
   public image    : string = 'http://masteringionic2.com/perch/resources/mastering-ionic-2-cover-1-w320.png';
   public uri      : string = 'http://masteringionic2.com/products/product-detail/s/mastering-ionic-2-e-book';
 
-  constructor(
+  constructor(public alertCtrl: AlertController,
     public navCtrl: NavController, public zone: NgZone, public maps: GoogleMaps, public platform: Platform,
     public geolocation: Geolocation, public viewCtrl: ViewController, public db: AngularFireDatabase, private _auth: AuthProvider,private socialSharing : SocialSharing) {
     this.markers = [];
@@ -128,48 +128,84 @@ export class MyPhotosPage {
 
   shareViaInstagram(image:string)
   {
-    this.socialSharing.shareViaInstagram(this.message, image)
-    .then((data) => {
-      console.log('Shared via Facebook');
+    this.socialSharing.canShareVia("instagram")
+    .then(() => {
+      this.socialSharing.shareViaInstagram(this.message, image)
+        .then(() => {
+        })
+        .catch(() => {
+          let alert = this.alertCtrl.create({
+            title: "Error",
+            subTitle: "Your image has not been shared via Instagram, please try again later",
+            buttons: ['OK']
+          });
+          alert.present();
+        });
     })
-    .catch((err) => {
-      console.log("===========================" + JSON.stringify(err) + " ===========================") ;
-      console.log('Was not shared via Facebook');
+    .catch(() => {
+      let alert = this.alertCtrl.create({
+        title: 'Sharing via Instagram is not supported',
+        subTitle: 'Have you the Instagram app installed?',
+        buttons: ['Dismiss']
+      });
+      alert.present();
     });
   }
 
   shareViaFacebook(image:string)
   {
-    this.socialSharing.shareViaFacebook(this.message, image, null)
-    .then((data) => {
-      console.log('Shared via Facebook');
+    this.socialSharing.canShareVia("facebook")
+    .then(() => {
+      this.socialSharing.shareViaFacebook(this.message, image, null)
+        .then(() => {
+        })
+        .catch(() => {
+          let alert = this.alertCtrl.create({
+            title: "Error",
+            subTitle: "Your image has not been shared via Facebook, please try again later",
+            buttons: ['OK']
+          });
+          alert.present();
+        });
     })
-    .catch((err) => {
-      console.log("===========================" + JSON.stringify(err) + " ===========================") ;
-      console.log('Was not shared via Facebook');
+    .catch(() => {
+      let alert = this.alertCtrl.create({
+        title: 'Sharing via Facebook is not supported',
+        subTitle: 'Have you the Facebook app installed?',
+        buttons: ['Dismiss']
+      });
+      alert.present();
     });
   }
 
   shareViaTwitter(image:string)
   {
-  //  this.socialSharing.canShareVia("twitter")
-  //     .then((data) => {
+    this.socialSharing.canShareVia("twitter")
+      .then(() => {
         this.socialSharing.shareViaTwitter(this.message, image, null)
-          .then((data) => {
-            console.log('Shared via Twitter');
+          .then(() => {
           })
-          .catch((err) => {
-            console.log("===========================" + JSON.stringify(err) + " ===========================");
-            console.log('Was not shared via Twitter');
-    //       })
-    // .catch ((err) => {
-    //       console.log(err);
-    //       console.log('Not able to be shared via Twitter, have you installed the app');
-    //     });
+          .catch(() => {
+            let alert = this.alertCtrl.create({
+              title: "Error",
+              subTitle: "Your image has not been shared via Twitter, please try again later",
+              buttons: ['OK']
+            });
+            alert.present();
+          });
+      })
+      .catch(() => {
+        let alert = this.alertCtrl.create({
+          title: 'Sharing via Twitter is not supported',
+          subTitle: 'Have you the Twitter app installed?',
+          buttons: ['Dismiss']
+        });
+        alert.present();
       });
 
-  }
 
+  }
+  
   
 
   //open edit details page
