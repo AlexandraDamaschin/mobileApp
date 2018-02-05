@@ -6,20 +6,29 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { EventType, LoadingAction } from '../../models/Enum';
 import { LoadingData } from '../../models/common';
+import { UserDetailsService } from '../user-details/user-details';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 
 
 @Injectable()
 export class AuthProvider {
-  private _user: firebase.User;
+  private _userAuth: firebase.User;
+  private _userDetails: User;
 
-  constructor(private _firebaseAuth: AngularFireAuth, private _events: Events) {
+  constructor(private _firebaseAuth: AngularFireAuth, private _events: Events, private _userDetailsService: UserDetailsService, private _db: AngularFireDatabase) {
     this._events.publish(EventType.loading, new LoadingData(LoadingAction.show));
     this.subscribeToUser();
   }
 
-  get user(): firebase.User{
-    return this._user;
+  // this needs to be removed, and the my phots page should be using the user object and not the user auth object
+  get user(): firebase.User {
+
+    return this._userAuth;
+  }
+  get userDetails(): User {
+    return this._userDetails;
   }
 
   subscribeToUser() {
@@ -27,17 +36,23 @@ export class AuthProvider {
       this._events.publish(EventType.loading, new LoadingData(LoadingAction.hideAll));
       //authenticated
       if (user) {
-        this._events.publish(EventType.navigate, { page: 'TabsPage' });
-        this._user = user;
+        this._userAuth = user;
+        this.loadUserDetails(user.uid).subscribe((user: User) => {
+          console.log(user);
+          this._userDetails = user;
+          this._events.publish(EventType.navigate, { page: 'TabsPage' });
+        }, (error: Response) => { console.log("no auth") });
       }
+      
       else {
         //unauthenticated
-        if (this._user) {
+        if (this._userAuth) {
           //there was a user authenticated but it has expired, so alert the user that it's happened
           this._events.publish(EventType.error, { message: 'Login Session has expired, please login again' });
         }
         this._events.publish(EventType.navigate, { page: 'LoginPage' });
-        this._user = null;
+        this._userAuth = null;
+        this._userDetails = null;
       }
     });
   }
@@ -45,7 +60,7 @@ export class AuthProvider {
   login(user: User) {
     this._events.publish(EventType.loading, new LoadingData(LoadingAction.show, "Logging in, please wait"));
     this._firebaseAuth.auth.signInWithEmailAndPassword(user.email, user.password).then((usr: firebase.User) => {
-      this._user = usr;
+      this._userAuth = usr;
       this._events.publish(EventType.loading, new LoadingData(LoadingAction.hide));
 
     }).catch(err => {
@@ -84,12 +99,35 @@ export class AuthProvider {
 
       this._firebaseAuth.app.database().ref('users/' + res.uid).set(user).then(() => {
         this._events.publish(EventType.toast, { msg: 'Registration Successful' });
+
+        this._userDetailsService.createUser(user).subscribe(uData => {
+        }, )
       }).catch(err => {
         this._events.publish(EventType.error, err);
       });
+
+
 
     }).catch(err => {
       this._events.publish(EventType.error, err);
     });
   }
+
+  loadUserDetails(uid: string): Observable<User> {
+    // this._db.object<User>(`users/${uid}`).update({key: value}).then(res => {
+    //   ...something should happen here
+    // })
+    return this._db.object<User>(`users/${uid}`).valueChanges();
+  }
+
+  updateUserDetails(uid: string, userName : string): void {
+    this._db.object<User>(`users/${uid}`).update({userName: userName}).then(res => {
+  
+    })    
+ }
+
+ updatePassword(password: string): Promise<any> {
+   var user = firebase.auth().currentUser;
+   return user.updatePassword(password);
+}
 }
