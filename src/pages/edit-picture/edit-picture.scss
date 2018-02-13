@@ -31,8 +31,8 @@ page-edit-picture {
         // height: 10%;
     }
     .slide{
-         width: 40% !important;
-        height: 30% !important;
+        //  width: 40% !important;
+        // height: 30% !important;
     }
 
     // black and white filter
@@ -48,4 +48,25 @@ page-edit-picture {
         -webkit-filter: sepia(100%); /* Safari */
         filter: sepia(100%);
     }
+
+#grayscale  {
+     filter:grayscale(1);
+  }
+
+  #hue-rotate  {
+     filter:hue-rotate(90deg);
+  }
+  
+  
+  #opacity  {
+     filter:opacity(0.5);
+  }
+  
+  #brightness  {
+     filter:brightness(140%);
+  }
+  
+  #blur  {
+     filter:blur(5px);
+  }
 }
