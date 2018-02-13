@@ -45,3 +45,4 @@ export class EditPicturePage {
     this.navCtrl.pop();
   }
 }
+//test 

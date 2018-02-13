@@ -5,10 +5,23 @@ page-edit-picture {
         color: #488aff;
     }
     #mainImage {
-  
+        margin-top:15%;
+        width: 100%;
+        height: 100%;
+
     }
+    .slides{
+        margin-top: 5%;
+        // width: 100%;
+        // height: 10%;
+    }
+    .slide{
+         width: 40% !important;
+        height: 30% !important;
+    }
+
+    // black and white filter
     #blackWhiteImg{
-      // black and white filter
       -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
       filter: grayscale(100%);  
     }

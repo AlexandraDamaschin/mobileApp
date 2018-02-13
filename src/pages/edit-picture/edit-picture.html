@@ -9,21 +9,35 @@
 </ion-header>
 
 <ion-content>
-  <ion-slides>
-    <ion-slide>
-      <img id="mainImage" src={{imageURL}}>
-    </ion-slide>
-    <ion-slide>
+  <ion-item>
+    <img id="mainImage" src={{imageURL}}>
+  </ion-item>
+
+  <ion-slides class="slides">
+    <ion-slide class="slide">
       <img id="blackWhiteImg" src={{imageURL}} />
+      <label>BW</label>
     </ion-slide>
-    <ion-slide>
+    <ion-slide class="slide">
       <img id="contrasImg" src={{imageURL}}/>
+      <label>BW</label>
     </ion-slide>
-    <ion-slide>
+    <ion-slide class="slide">
       <img id="sepiaImg" src={{imageURL}} />
+      <label>BW</label>
     </ion-slide>
-    <ion-slide>
+    <ion-slide class="slide">
       <img id="shadowImg" src={{imageURL}}/>
+      <label>BW</label>
+    </ion-slide>
+    <ion-slide class="slide">
+      <img id="shadowImg" src={{imageURL}}/>
+      <label>BW</label>
+    </ion-slide>
+    <ion-slide class="slide">
+      <img id="shadowImg" src={{imageURL}}/>
+      <label>BW</label>
     </ion-slide>
   </ion-slides>
+
 </ion-content>
