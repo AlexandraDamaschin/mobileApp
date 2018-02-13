@@ -3,40 +3,52 @@
   <!-- back button to my photos -->
   <ion-navbar>
     <ion-icon (click)="onBackButton()"></ion-icon>
-    <ion-icon class="right" name="md-cloud-done" (click)="uploadEditPicture()"> DONE</ion-icon>
+    <!-- <ion-icon class="right" name="md-cloud-done" (click)="uploadEditPicture()"> DONE</ion-icon> -->
   </ion-navbar>
   <!-- </ion-toolbar> -->
 </ion-header>
 
 <ion-content>
-  <ion-item>
+  <!-- <ion-item>
     <img id="mainImage" src={{imageURL}}>
-  </ion-item>
+  </ion-item> -->
 
   <ion-slides class="slides">
     <ion-slide class="slide">
+      <img src={{imageURL}} />
+      <label>Original</label>
+    </ion-slide>
+    <ion-slide class="slide">
       <img id="blackWhiteImg" src={{imageURL}} />
-      <label>BW</label>
+      <label>Black and White</label>
     </ion-slide>
     <ion-slide class="slide">
       <img id="contrasImg" src={{imageURL}}/>
-      <label>BW</label>
+      <label>Contrast</label>
     </ion-slide>
     <ion-slide class="slide">
       <img id="sepiaImg" src={{imageURL}} />
       <label>BW</label>
     </ion-slide>
     <ion-slide class="slide">
-      <img id="shadowImg" src={{imageURL}}/>
-      <label>BW</label>
+      <img id="grayscale" src={{imageURL}}/>
+      <label>Gray</label>
     </ion-slide>
     <ion-slide class="slide">
-      <img id="shadowImg" src={{imageURL}}/>
-      <label>BW</label>
+      <img id="hue-rotate" src={{imageURL}}/>
+      <label>Hue</label>
     </ion-slide>
     <ion-slide class="slide">
-      <img id="shadowImg" src={{imageURL}}/>
-      <label>BW</label>
+      <img id="opacity" src={{imageURL}}/>
+      <label>Opacity</label>
+    </ion-slide>
+    <ion-slide class="slide">
+      <img id="brightness" src={{imageURL}}/>
+      <label>Brightness</label>
+    </ion-slide>
+    <ion-slide class="slide">
+      <img id="mainImage" src={{imageURL}} />
+      <label>Filters</label>
     </ion-slide>
   </ion-slides>
 
