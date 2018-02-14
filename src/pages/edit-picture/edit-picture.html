@@ -1,18 +1,11 @@
 <ion-header>
-  <!-- <ion-toolbar> -->
   <!-- back button to my photos -->
   <ion-navbar>
     <ion-icon (click)="onBackButton()"></ion-icon>
-    <!-- <ion-icon class="right" name="md-cloud-done" (click)="uploadEditPicture()"> DONE</ion-icon> -->
   </ion-navbar>
-  <!-- </ion-toolbar> -->
 </ion-header>
 
 <ion-content>
-  <!-- <ion-item>
-    <img id="mainImage" src={{imageURL}}>
-  </ion-item> -->
-
   <ion-slides class="slides">
     <ion-slide class="slide">
       <img src={{imageURL}} />
@@ -28,7 +21,7 @@
     </ion-slide>
     <ion-slide class="slide">
       <img id="sepiaImg" src={{imageURL}} />
-      <label>BW</label>
+      <label>Sepia</label>
     </ion-slide>
     <ion-slide class="slide">
       <img id="grayscale" src={{imageURL}}/>
