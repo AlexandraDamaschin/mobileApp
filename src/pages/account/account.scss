@@ -1,4 +1,15 @@
-page-account img {
+page-account {
+  img {
     max-width: 140px;
     border-radius: 50%;
   }
+  .logo{
+    width: 73%;
+    display: block;
+    margin: 0 auto;
+}
+h1{
+  text-align: center;
+  font-weight: bold;
+}
+}

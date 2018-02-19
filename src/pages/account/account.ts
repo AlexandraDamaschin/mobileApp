@@ -20,12 +20,22 @@ import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 export class AccountPage {
   private user: User;
   private Test: string;
-  private string 
+  private _username: string;
 
   constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, private _auth: AuthProvider, private _fireDB:FireDbProvider) {
   this.user = new User();
   this._auth.subscribeToUser();
+  this._username = this._auth.userDetails.userName;
  
+  }
+
+  get username(): string
+  {
+      return this._username;
+  }
+  set username(username: string)
+  {
+      this._username = username;
   }
 
   ionViewDidLoad() {
@@ -117,7 +127,7 @@ export class AccountPage {
       text: 'Ok',
       handler: (data: any) => {
         this._auth.updateUserDetails(this._auth.userDetails.uid,<string>data.UserName)
-       console.log("write logic change password")
+       this._username = <string>data.UserName;
       }
     });
 

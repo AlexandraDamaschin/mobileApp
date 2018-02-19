@@ -10,11 +10,15 @@
 <ion-content class="outer-content">
   <!-- <div padding-top text-center *ngIf="username"> -->
       <div padding-top text-center>
-    <img src="http://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
-    <h2>{{username}}</h2>
+          <ion-item>
+              <img class="logo" src="../assets/imgs/logoSally.png" alt="logoSally">
+            </ion-item>
+    <!-- <img src="http://www.gravatar.com/avatar?d=mm&s=140" alt="avatar"> -->
+   <ion-item>
+    <h1>{{_username}}</h1>
+    </ion-item>
 
     <ion-list inset>
-      <button ion-item>Update Picture</button>
       <button ion-item (click)="changeUsername()">Change Username </button>
       <button ion-item (click)="changePassword()">Change Password</button>
       <button ion-item>Support</button>
