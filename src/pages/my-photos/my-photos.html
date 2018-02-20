@@ -18,7 +18,7 @@
         <ion-avatar item-start>
           <img src={{item.downloadURL}} />
         </ion-avatar>
-        <h2>User name goes here</h2>
+        <h2>{{this._auth.userDetails.userName}}</h2>
         <p>{{ item.date | fromUnix:'ddd, MMM Do YYYY, HH:MM'}}</p>
         <ion-fab right top class="top right">
             <button ion-fab mini color="secondary" (click)="openEdit(item.downloadURL)"><i class="fa fa-pencil-square-o"></i></button>
