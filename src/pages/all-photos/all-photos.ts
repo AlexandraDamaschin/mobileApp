@@ -52,7 +52,7 @@ export class AllPhotosPage {
   }
   ionViewDidLoad(): void {
     this.loadData();
-    this._pageName = this.navCtrl.getActive().name;    
+    this._pageName = this.navCtrl.getActive().name;
     let mapLoaded = this.maps.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement).then(() => {
     });
   }
@@ -114,8 +114,8 @@ export class AllPhotosPage {
     <div id="content"><h1>${date}</h1>
       <div id="bodyContent">
         <img src="${p.downloadURL}" width="250"> 
-        <p>${p.address}</p>
-        <p>${p.email}</p>
+        <p><b>${p.email}</b></p>
+        ${this.prettifyAddress(p.address)}
       </div>
     </div>`;
 
@@ -141,6 +141,15 @@ export class AllPhotosPage {
       this.addInfoWindowToMarker(marker, p);
       this._markers.push(marker);
     }, timeout);
+  }
+
+  prettifyAddress(add: string) {
+    let result = '';
+    let elems = add.split(',');
+    elems.forEach(element => {
+      result += `<p>${element}</p>`
+    });
+    return result;
   }
 
 }

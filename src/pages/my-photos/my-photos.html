@@ -18,41 +18,40 @@
         <ion-avatar item-start>
           <img src={{item.downloadURL}} />
         </ion-avatar>
-        <h2>{{this._auth.userDetails.userName}}</h2>
+        <h2 *ngIf="this._auth != null">{{this._auth.userDetails.userName}}</h2>
         <p>{{ item.date | fromUnix:'ddd, MMM Do YYYY, HH:MM'}}</p>
         <ion-fab right top class="top right">
-            <button ion-fab mini color="secondary" (click)="openEdit(item.downloadURL)"><i class="fa fa-pencil-square-o"></i></button>
-          </ion-fab>
+          <button ion-fab mini color="secondary" (click)="openEdit(item.downloadURL)">
+            <i class="fa fa-pencil-square-o"></i>
+          </button>
+        </ion-fab>
       </ion-item>
       <img src={{item.downloadURL}} />
       <ion-card-content>
-        <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?!
-          Whoa. This is heavy.</p>
+        <ion-row>
+          <ion-col col-4>
+            <div class="button-wrapper">
+              <button ion-fab mini icon-only (click)="shareViaFacebook(item.downloadURL)" class="face">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </button>
+            </div>
+          </ion-col>
+          <ion-col col-4>
+            <div class="button-wrapper">
+              <button ion-fab mini icon-only (click)="shareViaTwitter(item.downloadURL)" class="twit">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </button>
+            </div>
+          </ion-col>
+          <ion-col col-4>
+            <div class="button-wrapper">
+              <button ion-fab mini icon-only (click)="shareViaInstagram(item.downloadURL)" class="insta">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </button>
+            </div>
+          </ion-col>
+        </ion-row>
       </ion-card-content>
-      <ion-row>
-        <ion-col>
-          <button ion-button icon-left clear small>
-            <ion-icon name="thumbs-up"></ion-icon>
-            <div>12 Likes</div>
-          </button>
-        </ion-col>
-        <ion-col>
-          <button ion-button icon-left clear small>
-            <ion-icon name="text"></ion-icon>
-            <div>4 Comments</div>
-          </button>
-        </ion-col>
-        <ion-col center text-center>
-            <ion-fab right bottom #fab class="right">
-                <button ion-fab mini color="primary"><ion-icon ios="ios-share" md="md-share" ></ion-icon></button>
-                <ion-fab-list side="top">
-                  <button ion-fab (click)="shareViaFacebook(item.downloadURL)"><ion-icon name="logo-facebook"></ion-icon></button>
-                  <button ion-fab (click)="shareViaTwitter(item.downloadURL)"><ion-icon name="logo-twitter"></ion-icon></button>
-                  <button ion-fab (click)="shareViaInstagram(item.downloadURL)"><ion-icon name="logo-instagram"></ion-icon></button>
-                </ion-fab-list>
-              </ion-fab>
-        </ion-col>
-      </ion-row>
     </ion-card>
   </ion-list>
 
@@ -62,12 +61,3 @@
   <div #pleaseConnect id="please-connect">
     <p>Please connect to the Internet...</p>
   </div>
-  <!-- </div> -->
-<!-- </ion-content>
-
-
-<div id="infoWindow">
-  <img src>
-  <p>blah blah</p>
-  <p>more blah</p>
-</div> -->

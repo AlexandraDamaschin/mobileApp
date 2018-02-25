@@ -91,7 +91,7 @@ export class GoogleMaps {
         fullscreenControl: false,
         streetViewControl: false,
         gestureHandling: 'greedy',
-        // zoomControl: false
+        zoomControl: false
       }
       this.map = new google.maps.Map(this.mapElement, mapOptions);
       // this.addCenterPin(latLng);

@@ -28,6 +28,7 @@ export class MyPhotosPage {
   photos: any;
   segment: string = "map";
   markers: any[];
+  infoWindows: any[];
 
   @ViewChild('map') mapElement: ElementRef;
   @ViewChild('pleaseConnect') pleaseConnect: ElementRef;
@@ -45,17 +46,26 @@ export class MyPhotosPage {
 
   constructor(public alertCtrl: AlertController,
     public navCtrl: NavController, public zone: NgZone, public maps: GoogleMaps, public platform: Platform,
-    public geolocation: Geolocation, public viewCtrl: ViewController, public db: AngularFireDatabase, private _auth: AuthProvider, private socialSharing: SocialSharing) {
-    this.markers = [];
+    public geolocation: Geolocation, public viewCtrl: ViewController, public db: AngularFireDatabase, public _auth: AuthProvider, private socialSharing: SocialSharing) {
+    this.markers = this.infoWindows = [];
     this.message = "I'm using the SALLI Box";
   }
   ionViewDidLoad(): void {
     this.loadData();
     let mapLoaded = this.maps.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement).then(() => {
+      this.addCloseListener();
     });
   }
 
   segmentChanged($event) {
+  }
+
+  addCloseListener() {
+    google.maps.event.addListener(this.maps.map, "click", () => {
+      for (let i = 0; i < this.infoWindows.length; i++) {
+        this.infoWindows[i].close();
+      }
+    })
   }
 
 
@@ -96,18 +106,22 @@ export class MyPhotosPage {
     <div id="content"><h1>${date}</h1>
       <div id="bodyContent">
         <img src="${p.downloadURL}" width="250"> 
-        <p>${p.address}</p>
-        <p>${p.email}</p>
+        <p><b>${p.email}</b></p>
+        ${this.prettifyAddress(p.address)}
       </div>
     </div>`;
 
 
-    var infowindow = new google.maps.InfoWindow({
+    let infowindow = new google.maps.InfoWindow({
       content: contentString
     });
     marker.addListener('click', () => {
+      for (let i = 0; i < this.infoWindows.length; i++) {
+        this.infoWindows[i].close();
+      };
       infowindow.open(this.maps.map, marker);
     });
+    this.infoWindows.push(infowindow);
   }
 
   clearMarkers() {
@@ -200,6 +214,15 @@ export class MyPhotosPage {
   //open edit details page
   openEdit(imageURL: string) {
     this.navCtrl.push('EditPicturePage', { imageURL: imageURL })
+  }
+
+  prettifyAddress(add: string) {
+    let result = '';
+    let elems = add.split(',');
+    elems.forEach(element => {
+      result += `<p>${element}</p>`
+    });
+    return result;
   }
 
 }
