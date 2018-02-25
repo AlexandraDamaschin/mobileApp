@@ -38,7 +38,6 @@ export class AuthProvider {
       if (user) {
         this._userAuth = user;
         this.loadUserDetails(user.uid).subscribe((user: User) => {
-          console.log(user);
           this._userDetails = user;
           this._events.publish(EventType.navigate, { page: 'TabsPage' });
         }, (error: Response) => { console.log("no auth") });

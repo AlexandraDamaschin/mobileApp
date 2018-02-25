@@ -41,17 +41,11 @@ export class MyPhotosPage {
   searchDisabled: boolean;
   location: any;
   mapLoaded: any;
-
-
-  public sendTo   : any;
-  public subject  : string = 'Message from Social Sharing App';
-  public message  : string ;
-  public image    : string = 'http://masteringionic2.com/perch/resources/mastering-ionic-2-cover-1-w320.png';
-  public uri      : string = 'http://masteringionic2.com/products/product-detail/s/mastering-ionic-2-e-book';
+  public message: string;
 
   constructor(public alertCtrl: AlertController,
     public navCtrl: NavController, public zone: NgZone, public maps: GoogleMaps, public platform: Platform,
-    public geolocation: Geolocation, public viewCtrl: ViewController, public db: AngularFireDatabase, private _auth: AuthProvider,private socialSharing : SocialSharing) {
+    public geolocation: Geolocation, public viewCtrl: ViewController, public db: AngularFireDatabase, private _auth: AuthProvider, private socialSharing: SocialSharing) {
     this.markers = [];
     this.message = "I'm using the SALLI Box";
   }
@@ -62,8 +56,6 @@ export class MyPhotosPage {
   }
 
   segmentChanged($event) {
-    console.log("changd");
-    console.log(this.segment);
   }
 
 
@@ -126,60 +118,57 @@ export class MyPhotosPage {
   }
 
 
-  shareViaInstagram(image:string)
-  {
+  shareViaInstagram(image: string) {
     this.socialSharing.canShareVia("instagram")
-    .then(() => {
-      this.socialSharing.shareViaInstagram(this.message, image)
-        .then(() => {
-        })
-        .catch(() => {
-          let alert = this.alertCtrl.create({
-            title: "Error",
-            subTitle: "Your image has not been shared via Instagram, please try again later",
-            buttons: ['OK']
+      .then(() => {
+        this.socialSharing.shareViaInstagram(this.message, image)
+          .then(() => {
+          })
+          .catch(() => {
+            let alert = this.alertCtrl.create({
+              title: "Error",
+              subTitle: "Your image has not been shared via Instagram, please try again later",
+              buttons: ['OK']
+            });
+            alert.present();
           });
-          alert.present();
+      })
+      .catch(() => {
+        let alert = this.alertCtrl.create({
+          title: 'Sharing via Instagram is not supported',
+          subTitle: 'Have you the Instagram app installed?',
+          buttons: ['Dismiss']
         });
-    })
-    .catch(() => {
-      let alert = this.alertCtrl.create({
-        title: 'Sharing via Instagram is not supported',
-        subTitle: 'Have you the Instagram app installed?',
-        buttons: ['Dismiss']
+        alert.present();
       });
-      alert.present();
-    });
   }
 
-  shareViaFacebook(image:string)
-  {
+  shareViaFacebook(image: string) {
     this.socialSharing.canShareVia("facebook")
-    .then(() => {
-      this.socialSharing.shareViaFacebook(this.message, image, null)
-        .then(() => {
-        })
-        .catch(() => {
-          let alert = this.alertCtrl.create({
-            title: "Error",
-            subTitle: "Your image has not been shared via Facebook, please try again later",
-            buttons: ['OK']
+      .then(() => {
+        this.socialSharing.shareViaFacebook(this.message, image, null)
+          .then(() => {
+          })
+          .catch(() => {
+            let alert = this.alertCtrl.create({
+              title: "Error",
+              subTitle: "Your image has not been shared via Facebook, please try again later",
+              buttons: ['OK']
+            });
+            alert.present();
           });
-          alert.present();
+      })
+      .catch(() => {
+        let alert = this.alertCtrl.create({
+          title: 'Sharing via Facebook is not supported',
+          subTitle: 'Have you the Facebook app installed?',
+          buttons: ['Dismiss']
         });
-    })
-    .catch(() => {
-      let alert = this.alertCtrl.create({
-        title: 'Sharing via Facebook is not supported',
-        subTitle: 'Have you the Facebook app installed?',
-        buttons: ['Dismiss']
+        alert.present();
       });
-      alert.present();
-    });
   }
 
-  shareViaTwitter(image:string)
-  {
+  shareViaTwitter(image: string) {
     this.socialSharing.canShareVia("twitter")
       .then(() => {
         this.socialSharing.shareViaTwitter(this.message, image, null)
@@ -205,12 +194,12 @@ export class MyPhotosPage {
 
 
   }
-  
-  
+
+
 
   //open edit details page
   openEdit(imageURL: string) {
-    this.navCtrl.push('EditPicturePage', {imageURL: imageURL})
+    this.navCtrl.push('EditPicturePage', { imageURL: imageURL })
   }
 
 }

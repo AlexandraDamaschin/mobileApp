@@ -90,7 +90,7 @@
         <variable name="APP_NAME" value="“ProjectAwesome&#xA;&#xA;&#xA;ionic cordova plugin add cordova-plugin-facebook4 --variable APP_ID=422969994789166 --variable APP_NAME=“ProjectAwesome" />
     </plugin>
     <plugin name="cordova-plugin-x-socialsharing" spec="^5.2.1" />
+    <allow-navigation href="http://192.168.1.2:8100" />
     <engine name="browser" spec="5.0.3" />
     <engine name="android" spec="7.0.0" />
-    <allow-navigation href="http://192.168.1.2:8100" />
 </widget>

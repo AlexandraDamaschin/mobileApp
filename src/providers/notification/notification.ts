@@ -1,5 +1,5 @@
 import { EventType } from '../../models/Enum';
-import { Subject } from 'rxjs/Rx';
+import { Subject } from 'rxjs/Subject';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
