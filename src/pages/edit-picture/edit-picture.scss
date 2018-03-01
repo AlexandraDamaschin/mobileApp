@@ -1,9 +1,8 @@
 page-edit-picture {
     #mainImage {
-            background-size:cover;
-            background-blend-mode: screen;
-            animation: filter 6s ease infinite;
-        
+        background-size: cover;
+        background-blend-mode: screen;
+        animation: filter 6s ease infinite; // multimple filers on image
         @keyframes filter {
             0% {
                 filter: hue-rotate(360deg) sepia(0) grayscale(0);
@@ -11,54 +10,39 @@ page-edit-picture {
             50% {
                 filter: hue-rotate(0) sepia(100%) grayscale(50%);
             }
-            100%{
+            100% {
                 filter: hue-rotate(360deg) sepia(0) grayscale(0);
             }
         }
-
     }
-    .slides{
+    .slides {
         margin-top: 5%;
-        // width: 100%;
-        // height: 10%;
-    }
-    .slide{
-        //  width: 40% !important;
-        // height: 30% !important;
-    }
-
-    // black and white filter
-    #blackWhiteImg{
-      -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-      filter: grayscale(100%);  
-    }
-    #contrasImg{
-        -webkit-filter: contrast(200%); /* Safari */
+    } // black and white filter
+    #blackWhiteImg {
+        -webkit-filter: grayscale(100%);
+        /* Safari 6.0 - 9.0 */
+        filter: grayscale(100%);
+    } // contrast  and white filter
+    #contrasImg {
+        -webkit-filter: contrast(200%);
+        /* Safari */
         filter: contrast(200%);
-    }
-    #sepiaImg{
-        -webkit-filter: sepia(100%); /* Safari */
+    } // sepia filter
+    #sepiaImg {
+        -webkit-filter: sepia(100%);
+        /* Safari */
         filter: sepia(100%);
+    } // gray scale filter
+    #grayscale {
+        filter: grayscale(1);
+    } // hue filter
+    #hue-rotate {
+        filter: hue-rotate(90deg);
+    } // opacity filter
+    #opacity {
+        filter: opacity(0.5);
+    } // brightness filter
+    #brightness {
+        filter: brightness(140%);
     }
-
-#grayscale  {
-     filter:grayscale(1);
-  }
-
-  #hue-rotate  {
-     filter:hue-rotate(90deg);
-  }
-  
-  
-  #opacity  {
-     filter:opacity(0.5);
-  }
-  
-  #brightness  {
-     filter:brightness(140%);
-  }
-  
-  #blur  {
-     filter:blur(5px);
-  }
 }
