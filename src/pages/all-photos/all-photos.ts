@@ -41,6 +41,8 @@ export class AllPhotosPage {
   mapLoaded: any;
   private _markers: any[];
   private _pageName: string;
+  infoWindows: any[];
+
 
 
   constructor(public navCtrl: NavController, public zone: NgZone, public maps: GoogleMaps, public platform: Platform,
@@ -49,12 +51,22 @@ export class AllPhotosPage {
       if (data.type === EventType.map && this._pageName == 'AllPhotosPage')
         this.mapZoomChanged(data.obj);
     })
+    this.infoWindows = [];
   }
   ionViewDidLoad(): void {
     this.loadData();
     this._pageName = this.navCtrl.getActive().name;
     let mapLoaded = this.maps.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement).then(() => {
+      this.addCloseListener();
     });
+  }
+
+  addCloseListener() {
+    google.maps.event.addListener(this.maps.map, "click", () => {
+      for (let i = 0; i < this.infoWindows.length; i++) {
+        this.infoWindows[i].close();
+      }
+    })
   }
 
   loadData() {
@@ -123,9 +135,14 @@ export class AllPhotosPage {
     var infowindow = new google.maps.InfoWindow({
       content: contentString
     });
+    for (let i = 0; i < this.infoWindows.length; i++) {
+      this.infoWindows[i].close();
+    };
     marker.addListener('click', () => {
       infowindow.open(this.maps.map, marker);
     });
+    this.infoWindows.push(infowindow);
+    
   }
 
 

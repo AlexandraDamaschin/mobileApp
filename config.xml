@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.project-awesome.salli.mobile" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Salli Mobile</name>
     <description>Salli Mobile App</description>
     <author email="projectawesome1617@gmail.com" href="http://ionicframework.com/">Ionic Framework Team</author>
@@ -91,6 +91,7 @@
     </plugin>
     <plugin name="cordova-plugin-x-socialsharing" spec="^5.2.1" />
     <allow-navigation href="http://192.168.1.2:8100" />
+    <allow-navigation href="http://192.168.20.161:8100" />
     <engine name="browser" spec="5.0.3" />
     <engine name="android" spec="7.0.0" />
 </widget>
