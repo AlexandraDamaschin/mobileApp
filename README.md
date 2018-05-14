@@ -2,7 +2,7 @@
 
 This app was made to retreive photo from the tourist hostop. 
 
-You can find out app on Google Play :
+You can find the app on Google Play :
 
 https://play.google.com/store/apps/details?id=com.project_awesome.salli.mobile
 
